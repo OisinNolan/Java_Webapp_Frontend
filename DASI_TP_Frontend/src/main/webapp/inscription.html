@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Inscription</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <div>Inscription</div>
+            <div>
+                Nom
+                <input type="text" id="nomInput" />
+            </div>
+            <div>
+                Prénom
+                <input type="text" id="prenomInput" />
+            </div>
+            <div>
+                Date de naissance
+                <input type="text" id="dateNaissanceInput" />
+            </div>
+            <div>
+                Adresse postale
+                <input type="text" id="adresseInput" />
+            </div>
+            <div>
+                Numéro Telephone
+                <input type="text" id="numeroTelephoneInput" />
+            </div>
+            <div>
+                Adresse e-mail
+                <input type="text" id="mailInput" />
+            </div>
+            <div>
+                Mot de passe
+                <input type="password" id="mdpInput" />
+            </div>
+            <div>
+                Confirmer mot de passe
+                <input type="password" id="confirmMdpInput" />
+            </div>
+            <div id="errorTextContainer">
+                
+            </div>
+            <div>
+                <button id="enregistrerBtn">Enregister</button>
+                <a href="index.html"><button>Annuler</button></a>
+            </div>
+            <div id="notification">
+                
+            </div>
+        </div>
+        <script>
+            $(document).ready( function () {
+                $('#enregistrerBtn').on( 'click', function () { // Fonction appelée lors du clic sur le bouton
+
+                    console.log("clic sur le bouton de connexion"); // LOG dans Console Javascript
+                    $('#notification').html("Connexion..."); // Message pour le paragraphe de notification
+
+                    let input = {
+                        nom: $('#nomInput').val(),
+                        prenom: $('#prenomInput').val(),
+                        dateNaissance: $('#dateNaissanceInput').val(),
+                        adresse: $('#adresseInput').val(),
+                        numeroTelephone: $('#numeroTelephoneInput').val(),
+                        mail: $('#mailInput').val(),
+                        mdp: $('#mdpInput').val(),
+                        confirmMdp: $('#confirmMdpInput').val()
+                    }
+                    
+                    let errorMessage = "";
+                    
+                    let validateInput = () => {
+                        
+                        let valid = true;
+                        
+                        for(attribute in input) {
+                            if(input[attribute] === "") {
+                                valid = false;
+                                errorMessage = "Il faut remplir tous les champs!";
+                            }
+                        }
+                        
+                        if(input.mdp !== input.confirmMdp) {
+                            valid = false;
+                            errorMessage = "Les deux mots de passes doivent être le même!";
+                        }
+                        
+                        return valid;
+                    }
+                    
+                    if(validateInput()) {
+                        $.ajax({
+                            url: './ActionServlet',
+                            method: 'POST',
+                            data: {
+                                todo: 'inscrire',
+                                data: input
+                            },
+                            dataType: 'json'
+                        })
+                        .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
+                            console.log('Response',response); // LOG dans Console Javascript
+                            if (response.connexion) {
+                                $('#notification').html("Connexion OK");  // Message pour le paragraphe de notification
+                                // todo: Go to profil astral
+                            }
+                            else {
+                                $('#notification').html("Erreur de Connexion"); // Message pour le paragraphe de notification
+                            }
+                        })
+                        .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
+                            console.log('Error',error); // LOG dans Console Javascript
+                            alert("Erreur lors de l'appel AJAX");
+                        })
+                        .always( function () { // Fonction toujours appelée
+
+                        });
+                    } else {
+                        $('#errorTextContainer').html(errorMessage);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
