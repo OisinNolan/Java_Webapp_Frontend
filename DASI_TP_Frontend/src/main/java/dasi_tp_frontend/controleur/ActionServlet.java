@@ -6,33 +6,37 @@
 package dasi_tp_frontend.controleur;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.insalyon.dasi.metier.service.Service;
-import fr.insalyon.dasi.metier.modele.Client;
 import javax.servlet.http.HttpSession;
 import fr.insalyon.dasi.ihm.web.serialisation.Serialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilClientSerialisation;
 import fr.insalyon.dasi.ihm.web.action.Action;
 import fr.insalyon.dasi.ihm.web.action.AuthentifierClientAction;
-
+import fr.insalyon.dasi.dao.JpaUtil;
 /**
  *
  * @author oisinnolan
  */
-@WebServlet(name = "ServletInscription", urlPatterns = {"/inscription"})
+@WebServlet(name = "ActionServlet", urlPatterns = {"/ActionServlet"})
 public class ActionServlet extends HttpServlet {
 
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        JpaUtil.init();
+    }
+
+    @Override
+    public void destroy() {
+        JpaUtil.destroy();
+        super.destroy();
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,7 +48,6 @@ public class ActionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         HttpSession session = request.getSession(true);
         request.setCharacterEncoding("UTF-8");
 

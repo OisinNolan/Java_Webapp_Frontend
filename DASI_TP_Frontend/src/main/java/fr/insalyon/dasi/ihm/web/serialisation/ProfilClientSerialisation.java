@@ -17,7 +17,6 @@ public class ProfilClientSerialisation extends Serialisation {
 
     @Override
     public void serialiser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         Client client = (Client)request.getAttribute("client");
         
         JsonObject container = new JsonObject();
