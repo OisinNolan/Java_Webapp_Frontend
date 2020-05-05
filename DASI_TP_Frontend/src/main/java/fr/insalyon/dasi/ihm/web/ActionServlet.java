@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dasi_tp_frontend.controleur;
+package fr.insalyon.dasi.ihm.web;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
