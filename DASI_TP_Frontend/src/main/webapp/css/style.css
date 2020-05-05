@@ -1,0 +1,132 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 4 May 2020, 20:03:56
+    Author     : oisinnolan
+
+    This file will store some general styles that can be used
+    on any of the pages. It should store commonly used
+    styles such as those for generic buttons, colours
+    etc.
+
+    Colours used:
+    Dark purple: #0a0f50 (rgb(10, 15, 80))
+    Light pink: #ffedef
+    Pink: #f76583 (rgb(247, 101, 131))
+
+*/
+
+body {
+    font-family: 'helvetica';
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    background: #0a0f50;
+    height: 50px;
+}
+
+.navLogo {
+    width: 50px;
+    height: 50px;
+    filter: #f76583;
+    webkit-filter: #f76583;
+}
+
+.smallText {
+    font-size: 11pt;
+}
+
+.logoText {
+    font-size: 70pt;
+    margin-bottom: -22px;
+    margin-left: -23px;
+}
+
+.pink {
+    color: #f76583;
+}
+
+.purple {
+    color: #0a0f50;
+}
+
+.flexRight {
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+.content {
+    width: 100%;
+}
+
+.logoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.bigLogo {
+    width: 200px;
+    height: 200px; 
+}
+
+.zodiacIconsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.zodiacIcon {
+    width: 60px;
+    height: 60px;
+    margin: 20px;
+}
+
+.introText {
+    text-align: center;
+    width: 70%;
+    margin-left: 15%;
+    font-style: italic;
+}
+
+.fullBtnPurple {
+    background: #0a0f50;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    color: white;
+    text-decoration: none;
+    font-size: 15pt;
+    border: 2px solid #0a0f50;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+.bareBtnPurple {
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: white;
+    color: #0a0f50;
+    text-decoration: none;
+    font-size: 15pt;
+    border: 2px solid #0a0f50;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+.landingBtnContainer { 
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
