@@ -6,11 +6,45 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Profil Astral</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
     </head>
     <body>
-        <div>Hello profile! you should be logged in .....</div>
+        <nav class='navbar'>
+            <a href='../index.html'><img src='../resources/img/pink_logo.png' alt='small_logo' class='navLogo'/></a>
+            <a class='smallText pink flexRight' id='navText'></a>
+        </nav>
+        <div id='#worked'>
+            
+        </div>
+        <script>
+            $(document).ready( function () {
+                $.ajax({
+                        url: '../ActionServlet',
+                        method: 'GET',
+                        data: {
+                            todo: 'getLoggedInClient'
+                        },
+                        dataType: 'json'
+                    })
+                    .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
+                        console.log('Response',response); // LOG dans Console Javascript
+                        if (response.connexion) {
+                            let client = response.client;
+                            $('#navText').html("Bonjour, " + client.prenom + "!");
+                        }
+                    })
+                    .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
+                        console.log('Error',error); // LOG dans Console Javascript
+                        alert("Erreur lors de l'appel AJAX");
+                    })
+                    .always( function () { // Fonction toujours appelée
+                        
+                    });
+            });
+        </script>
     </body>
 </html>

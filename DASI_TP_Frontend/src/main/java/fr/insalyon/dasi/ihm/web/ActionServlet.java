@@ -17,6 +17,7 @@ import fr.insalyon.dasi.ihm.web.serialisation.Serialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilClientSerialisation;
 import fr.insalyon.dasi.ihm.web.action.Action;
 import fr.insalyon.dasi.ihm.web.action.AuthentifierClientAction;
+import fr.insalyon.dasi.ihm.web.action.GetLoggedInClientAction;
 import fr.insalyon.dasi.dao.JpaUtil;
 /**
  *
@@ -24,7 +25,7 @@ import fr.insalyon.dasi.dao.JpaUtil;
  */
 @WebServlet(name = "ActionServlet", urlPatterns = {"/ActionServlet"})
 public class ActionServlet extends HttpServlet {
-
+    
     @Override
     public void init() throws ServletException {
         super.init();
@@ -50,7 +51,7 @@ public class ActionServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         request.setCharacterEncoding("UTF-8");
-
+        
         String todo = request.getParameter("todo");
 
         Action action = null;
@@ -62,7 +63,9 @@ public class ActionServlet extends HttpServlet {
                     action = new AuthentifierClientAction();
                     serialisation = new ProfilClientSerialisation();
                     break;
-                case "...":
+                case "getLoggedInClient":
+                    action = new GetLoggedInClientAction();
+                    serialisation = new ProfilClientSerialisation();
                     break;
             }
         }

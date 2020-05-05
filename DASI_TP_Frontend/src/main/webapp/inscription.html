@@ -14,63 +14,54 @@ and open the template in the editor.
     </head>
     <body>
         <nav class='navbar'>
-            <a><img src='resources/pink_logo.png' alt='small_logo' class='navLogo'/></a>
+            <a href='index.html'><img src='resources/img/pink_logo.png' alt='small_logo' class='navLogo'/></a>
             <a class='smallText pink flexRight'>Connexion</a>
         </nav>
         <div class='content'>
             <div class='logoContainer'>
                 <div class='logoText purple'>Predict'IF</div>
-                <img src='resources/purple_logo.png'  alt='big_logo'  class='bigLogo'/>
+                <img src='resources/img/purple_logo.png'  alt='big_logo'  class='bigLogo'/>
             </div>
-            <div class='fromContainer lightPinkBack'>
-                <div class='formHeader purpleBack bigText'>Inscription</div>
-                <div class='formGroup'>
-                    <div class='splitForm'>
-                        <label class='formLabel'>Nom</label>
-                        <input type="text" id="nomInput" class='inputField'/>
-                    </div>
-                    <div class='splitForm'>
-                        <label class='formLabel'>Prénom</label>
-                        <input type="text" id="prenomInput" class='inputField'/>
-                    </div>
+            <div class='formContainer lightPinkBack'>
+                <div class='formHeader purpleBack'>
+                    <div class='bigText'>S'Inscrire</div>
+                    <div class='smallText'>Découvrez votre profil zodiaque!</div>
+                </div>
+                <div class='formGroup splitForm'>
+                        <input type="text" id="nomInput" class='inputField splitFormElem' placeholder="Nom"/>
+
+                        <input type="text" id="prenomInput" class='inputField splitFormElem' placeholder="Prénom"/>
+
                 </div>
                 <div class='formGroup'>
-                    <label class='formLabel'>Genre</label>
+                    <label class='formLabel'>Genre :</label>
                     <input type="radio" id="male" name="gender" value="male">
                     <label for="male">Masculin</label><br>
                     <input type="radio" id="female" name="gender" value="female">
                     <label for="female">Féminin</label><br>
                 </div>
                 <div class='formGroup'>
-                    <label class='formLabel'>Date de naissance</label>
-                    <input type="text" id="dateNaissanceInput" class='inputField'/>
+                    <input type="text" id="dateNaissanceInput" class='inputField' placeholder="Date de naissance"/>
                 </div>
                 <div class='formGroup'>
-                    <label class='formLabel'>Adresse postale</label>
-                    <input type="text" id="adresseInput" class='inputField'/>
+                    <input type="text" id="adresseInput" class='inputField' placeholder="Adresse postale"/>
                 </div>
                 <div class='formGroup'>
-                    <label class='formLabel'>Numéro Telephone</label>
-                    <input type="text" id="numeroTelephoneInput" class='inputField'/>
+                    <input type="text" id="numeroTelephoneInput" class='inputField' placeholder="Numéro Telephone"/>
                 </div>
                 <div class='formGroup'>
-                    <label class='formLabel'>Adresse e-mail</label>
-                    <input type="text" id="mailInput" class='inputField'/>
+                    <input type="text" id="mailInput" class='inputField' placeholder="Adresse e-mail"/>
                 </div>
                 <div class='formGroup'>
-                    <label class='formLabel'>Mot de passe</label>
-                    <input type="password" id="mdpInput" class='inputField'/>
+                    <input type="password" id="mdpInput" class='inputField' placeholder="Mot de passe"/>
                 </div>
                 <div class='formGroup'>
-                    <label class='formLabel'>Confirmer mot de passe</label>
-                    <input type="password" id="confirmMdpInput" class='inputField'/>
+                    <input type="password" id="confirmMdpInput" class='inputField' placeholder="Confirmer mot de passe"/>
                 </div>
-                <div id="errorTextContainer">
-
-                </div>
-                <div>
-                    <button id="enregistrerBtn">Enregister</button>
-                    <a href="index.html"><button>Annuler</button></a>
+                <div id="errorTextContainer" class="errorTextContainer"></div>
+                <div class='formBtnContainer'>
+                    <button id="enregistrerBtn" class='fullBtnPurple'>Enregistrer</button>
+                    <a href="index.html"><button class='bareBtnPurple'>Annuler</button></a>
                 </div>
             </div>
         </div>
@@ -142,7 +133,7 @@ and open the template in the editor.
 
                         });
                     } else {
-                        $('#errorTextContainer').html(errorMessage);
+                        $('#errorTextContainer').html("<div class=\"errorText\">" + errorMessage + "</div>");
                     }
                 });
             });

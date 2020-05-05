@@ -33,7 +33,7 @@ public class ProfilClientSerialisation extends Serialisation {
 
             container.add("client", jsonClient);
         }
-
+        
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
