@@ -15,7 +15,7 @@ and open the template in the editor.
     <body>
         <nav class='navbar'>
             <a href='index.html'><img src='resources/img/pink_logo.png' alt='small_logo' class='navLogo'/></a>
-            <a class='smallText pink flexRight'>Connexion</a>
+            <a href="login.html" style="text-decoration: none" class='smallText pink flexRight'>Connexion</a>
         </nav>
         <div class='content'>
             <div class='logoContainer'>
@@ -99,7 +99,7 @@ and open the template in the editor.
                         
                         if(input.mdp !== input.confirmMdp) {
                             valid = false;
-                            errorMessage = "Les deux mots de passes doivent être le même!";
+                            errorMessage = "Les deux mots de passe doivent être les mêmes!";
                         }
                         
                         return valid;
@@ -119,7 +119,8 @@ and open the template in the editor.
                             console.log('Response',response); // LOG dans Console Javascript
                             if (response.connexion) {
                                 $('#notification').html("Connexion OK");  // Message pour le paragraphe de notification
-                                // todo: Go to profil astral
+                                
+                                window.location.assign("/DASI_TP_Frontend/client/profile.html"); // Go to the profile
                             }
                             else {
                                 $('#notification').html("Erreur de Connexion"); // Message pour le paragraphe de notification

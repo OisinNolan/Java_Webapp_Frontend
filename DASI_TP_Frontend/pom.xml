@@ -16,9 +16,9 @@
     
     <dependencies>
         <dependency>
-            <groupId>fr.insalyon.dasi</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>PredictIF</artifactId>
-            <version>1.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>

@@ -20,6 +20,7 @@ import fr.insalyon.dasi.ihm.web.action.AuthentifierClientAction;
 import fr.insalyon.dasi.ihm.web.action.GetLoggedInClientAction;
 import fr.insalyon.dasi.dao.JpaUtil;
 import fr.insalyon.dasi.ihm.web.action.GetProfilAstralAction;
+import fr.insalyon.dasi.ihm.web.action.SInscrireAction;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilAstralSerialisation;
 /**
  *
@@ -63,6 +64,10 @@ public class ActionServlet extends HttpServlet {
             switch (todo) {
                 case "connecter":
                     action = new AuthentifierClientAction();
+                    serialisation = new ProfilClientSerialisation();
+                    break;
+                case "inscrire":
+                    action = new SInscrireAction();
                     serialisation = new ProfilClientSerialisation();
                     break;
                 case "getLoggedInClient":
