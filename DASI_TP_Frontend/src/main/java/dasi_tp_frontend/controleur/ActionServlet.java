@@ -55,7 +55,7 @@ public class ActionServlet extends HttpServlet {
 
         Action action = null;
         Serialisation serialisation = null;
-
+        
         if (todo != null) {
             switch (todo) {
                 case "connecter":
@@ -67,7 +67,7 @@ public class ActionServlet extends HttpServlet {
             }
         }
         
-        if (action != null) {
+        if (action != null && serialisation != null) {
             action.executer(request);
             serialisation.serialiser(request, response);
         }
