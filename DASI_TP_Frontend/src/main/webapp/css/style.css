@@ -47,6 +47,11 @@ body {
     webkit-filter: #f76583;
 }
 
+.navItem {
+    margin-left: 15px;
+    text-decoration: none;
+}
+
 .smallText {
     font-size: 11pt;
 }

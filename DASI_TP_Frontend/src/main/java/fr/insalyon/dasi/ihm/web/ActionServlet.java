@@ -19,6 +19,8 @@ import fr.insalyon.dasi.ihm.web.action.Action;
 import fr.insalyon.dasi.ihm.web.action.AuthentifierClientAction;
 import fr.insalyon.dasi.ihm.web.action.GetLoggedInClientAction;
 import fr.insalyon.dasi.dao.JpaUtil;
+import fr.insalyon.dasi.ihm.web.action.GetProfilAstralAction;
+import fr.insalyon.dasi.ihm.web.serialisation.ProfilAstralSerialisation;
 /**
  *
  * @author oisinnolan
@@ -66,6 +68,10 @@ public class ActionServlet extends HttpServlet {
                 case "getLoggedInClient":
                     action = new GetLoggedInClientAction();
                     serialisation = new ProfilClientSerialisation();
+                    break;
+                case "getProfilAstralOfLoggedInClient":
+                    action = new GetProfilAstralAction();
+                    serialisation = new ProfilAstralSerialisation();
                     break;
             }
         }
