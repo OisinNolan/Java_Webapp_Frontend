@@ -35,7 +35,7 @@ public class ClientLoginFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         HttpSession session = request.getSession(false);
 
-        if (session == null || session.getAttribute("clientId") == null) {
+        if (session == null || session.getAttribute("idClient") == null) {
             response.sendRedirect(request.getContextPath() + "/login.html"); // No logged-in user found, so redirect to login page.
         } else {
             chain.doFilter(req, res); // Logged-in user found, so just continue request.
