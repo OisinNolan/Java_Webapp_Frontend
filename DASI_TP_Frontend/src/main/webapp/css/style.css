@@ -56,6 +56,15 @@ body {
     color: #0a0f50;
 }
 
+.lightPinkBack {
+    background: #ffedef;
+}
+
+.purpleBack {
+    background: #0a0f50;
+    color: white;
+}
+
 .flexRight {
     margin-left: auto;
     margin-right: 15px;
@@ -75,6 +84,10 @@ body {
 .bigLogo {
     width: 200px;
     height: 200px; 
+}
+
+.bigText {
+    font-size: 20pt;
 }
 
 .zodiacIconsContainer {
@@ -127,6 +140,18 @@ body {
 .landingBtnContainer { 
     width: 100%;
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.fromContainer {
+    margin-top: 10px;
+    width: 50%;
+    margin-left: 25%;
+}
+
+.formHeader {
+    padding: 10px;
     display: flex;
     justify-content: center;
 }

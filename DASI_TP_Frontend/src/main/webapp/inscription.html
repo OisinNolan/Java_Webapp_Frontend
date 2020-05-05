@@ -10,51 +10,68 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
-        <div>
-            <div>Inscription</div>
-            <div>
-                Nom
-                <input type="text" id="nomInput" />
+        <nav class='navbar'>
+            <a><img src='resources/pink_logo.png' alt='small_logo' class='navLogo'/></a>
+            <a class='smallText pink flexRight'>Connexion</a>
+        </nav>
+        <div class='content'>
+            <div class='logoContainer'>
+                <div class='logoText purple'>Predict'IF</div>
+                <img src='resources/purple_logo.png'  alt='big_logo'  class='bigLogo'/>
             </div>
-            <div>
-                Prénom
-                <input type="text" id="prenomInput" />
-            </div>
-            <div>
-                Date de naissance
-                <input type="text" id="dateNaissanceInput" />
-            </div>
-            <div>
-                Adresse postale
-                <input type="text" id="adresseInput" />
-            </div>
-            <div>
-                Numéro Telephone
-                <input type="text" id="numeroTelephoneInput" />
-            </div>
-            <div>
-                Adresse e-mail
-                <input type="text" id="mailInput" />
-            </div>
-            <div>
-                Mot de passe
-                <input type="password" id="mdpInput" />
-            </div>
-            <div>
-                Confirmer mot de passe
-                <input type="password" id="confirmMdpInput" />
-            </div>
-            <div id="errorTextContainer">
-                
-            </div>
-            <div>
-                <button id="enregistrerBtn">Enregister</button>
-                <a href="index.html"><button>Annuler</button></a>
-            </div>
-            <div id="notification">
-                
+            <div class='fromContainer lightPinkBack'>
+                <div class='formHeader purpleBack bigText'>Inscription</div>
+                <div class='formGroup'>
+                    <div class='splitForm'>
+                        <label class='formLabel'>Nom</label>
+                        <input type="text" id="nomInput" class='inputField'/>
+                    </div>
+                    <div class='splitForm'>
+                        <label class='formLabel'>Prénom</label>
+                        <input type="text" id="prenomInput" class='inputField'/>
+                    </div>
+                </div>
+                <div class='formGroup'>
+                    <label class='formLabel'>Genre</label>
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Masculin</label><br>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Féminin</label><br>
+                </div>
+                <div class='formGroup'>
+                    <label class='formLabel'>Date de naissance</label>
+                    <input type="text" id="dateNaissanceInput" class='inputField'/>
+                </div>
+                <div class='formGroup'>
+                    <label class='formLabel'>Adresse postale</label>
+                    <input type="text" id="adresseInput" class='inputField'/>
+                </div>
+                <div class='formGroup'>
+                    <label class='formLabel'>Numéro Telephone</label>
+                    <input type="text" id="numeroTelephoneInput" class='inputField'/>
+                </div>
+                <div class='formGroup'>
+                    <label class='formLabel'>Adresse e-mail</label>
+                    <input type="text" id="mailInput" class='inputField'/>
+                </div>
+                <div class='formGroup'>
+                    <label class='formLabel'>Mot de passe</label>
+                    <input type="password" id="mdpInput" class='inputField'/>
+                </div>
+                <div class='formGroup'>
+                    <label class='formLabel'>Confirmer mot de passe</label>
+                    <input type="password" id="confirmMdpInput" class='inputField'/>
+                </div>
+                <div id="errorTextContainer">
+
+                </div>
+                <div>
+                    <button id="enregistrerBtn">Enregister</button>
+                    <a href="index.html"><button>Annuler</button></a>
+                </div>
             </div>
         </div>
         <script>
@@ -67,6 +84,7 @@ and open the template in the editor.
                     let input = {
                         nom: $('#nomInput').val(),
                         prenom: $('#prenomInput').val(),
+                        genre: $('input[name="gender"]:checked').val(),
                         dateNaissance: $('#dateNaissanceInput').val(),
                         adresse: $('#adresseInput').val(),
                         numeroTelephone: $('#numeroTelephoneInput').val(),
