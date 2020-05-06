@@ -28,7 +28,9 @@ public class SInscrireAction extends Action {
         String adresse = getParam(request, "adresse");
         String numeroTelephone = getParam(request, "numeroTelephone");
         String mail = getParam(request, "mail");
-        String mdp = getParam(request, "mdp");      
+        String mdp = getParam(request, "mdp");  
+        
+        System.out.println("DATE NAISSANCE " + dateNaissanceStr);
         
         // parse genreStr to Genre object
         Genre genre;
@@ -41,24 +43,32 @@ public class SInscrireAction extends Action {
         // parse dateNaissanceStr to Date object
         Date dateNaissance = null;
         try {
-            dateNaissance = new SimpleDateFormat("dd/MM/yyyy").parse(dateNaissanceStr);
+            dateNaissance = new SimpleDateFormat("yyyy-MM-dd").parse(dateNaissanceStr);
         } catch (ParseException ex) {
             Logger.getLogger(SInscrireAction.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         Service service = new Service();
         
-        Client client = new Client(nom, prenom, mail, mdp, numeroTelephone, genre, dateNaissance, adresse);
-        Long idClient = service.inscrire(client);
-        request.setAttribute("client", client);
-        
-        // Gestion de la Session: ici, enregistrer l'ID du Client authentifié
-        HttpSession session = request.getSession();
-        if (idClient != null) {
-            session.setAttribute("idClient", idClient);
-        }
-        else {
-            session.removeAttribute("idClient");
+        // We check here whether the mail provided has already been used to create
+        // an account. If so, we send an appropriate error message.
+        Client clientWithSameMail = service.rechercherClientParMail(mail);
+        if(clientWithSameMail != null) {
+            request.setAttribute("errorMessage", "Un compte avec l'adresse mail fournie existe déjà.");
+        } else {
+            
+            Client client = new Client(nom, prenom, mail, mdp, numeroTelephone, genre, dateNaissance, adresse);
+            Long idClient = service.inscrire(client);
+
+            // Gestion de la Session: ici, enregistrer l'ID du Client authentifié
+            HttpSession session = request.getSession();
+            if (idClient != null) {
+                session.setAttribute("idClient", idClient);
+            }
+            else {
+                request.setAttribute("errorMessage", "Une erreur s'est produite lors de la création de votre compte.");
+                session.removeAttribute("idClient");
+            }
         }
     }
     

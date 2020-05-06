@@ -11,6 +11,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/inscription.css">
     </head>
     <body>
         <nav class='navbar'>
@@ -41,7 +42,7 @@ and open the template in the editor.
                     <label for="female">Féminin</label><br>
                 </div>
                 <div class='formGroup'>
-                    <input type="text" id="dateNaissanceInput" class='inputField' placeholder="Date de naissance"/>
+                    <input type="text" id="dateNaissanceInput" class='inputField' placeholder="Date de naissance" onfocus="(this.type='date')" onblur="(this.type='text')" />
                 </div>
                 <div class='formGroup'>
                     <input type="text" id="adresseInput" class='inputField' placeholder="Adresse postale"/>
@@ -68,6 +69,7 @@ and open the template in the editor.
         <script>
             $(document).ready( function () {
                 $('#enregistrerBtn').on( 'click', function () { // Fonction appelée lors du clic sur le bouton
+                    showLoading();
 
                     console.log("clic sur le bouton de connexion"); // LOG dans Console Javascript
                     $('#notification').html("Connexion..."); // Message pour le paragraphe de notification
@@ -88,24 +90,45 @@ and open the template in the editor.
                     
                     let validateInput = () => {
                         
-                        let valid = true;
-                        
+                        // Ensure that no input is empty
                         for(attribute in input) {
                             if(input[attribute] === "") {
-                                valid = false;
                                 errorMessage = "Il faut remplir tous les champs!";
+                                return false;
                             }
                         }
                         
+                        // Ensure that passwords match
                         if(input.mdp !== input.confirmMdp) {
-                            valid = false;
                             errorMessage = "Les deux mots de passe doivent être les mêmes!";
+                            return false;
                         }
                         
-                        return valid;
-                    }
+                        // Ensure that mdp is long enough
+                        if(input.mdp.length < 5) {
+                            errorMessage = "Votre mot de passe doit contenir plus de 5 caractères";
+                            return false;
+                        }
+                        
+                        // That mdp contains at least one number
+                        var containsNumberPattern = new RegExp('[0-9]');
+                        if(!containsNumberPattern.test(input.mdp)) {
+                            errorMessage = "Votre mot de passe doit contenir au moins un chiffre";                            
+                            return false;
+                        }
+                        
+                        // That num telephone contains only numbers
+                        var phonePattern = new RegExp('^\\d+$');
+                        if(!phonePattern.test(input.numeroTelephone)) {
+                            errorMessage = "Votre numéro de téléphone ne peut contenir que des chiffres.";
+                            return false;
+                        }
+                        
+                        return true;
+                    };
                     
                     if(validateInput()) {
+                        
                         $.ajax({
                             url: './ActionServlet',
                             method: 'POST',
@@ -116,14 +139,12 @@ and open the template in the editor.
                             dataType: 'json'
                         })
                         .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
-                            console.log('Response',response); // LOG dans Console Javascript
-                            if (response.connexion) {
-                                $('#notification').html("Connexion OK");  // Message pour le paragraphe de notification
-                                
-                                window.location.assign("/DASI_TP_Frontend/client/profile.html"); // Go to the profile
+                            console.log("Response", response);
+                            if (response.errorMessage) {
+                                showError(response.errorMessage);
                             }
                             else {
-                                $('#notification').html("Erreur de Connexion"); // Message pour le paragraphe de notification
+                                 window.location.assign("/DASI_TP_Frontend/client/profile.html"); // Go to the profile
                             }
                         })
                         .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
@@ -131,13 +152,25 @@ and open the template in the editor.
                             alert("Erreur lors de l'appel AJAX");
                         })
                         .always( function () { // Fonction toujours appelée
-
                         });
                     } else {
-                        $('#errorTextContainer').html("<div class=\"errorText\">" + errorMessage + "</div>");
+                        showError(errorMessage);
                     }
                 });
             });
+            
+            function showError(message) {
+                $('#errorTextContainer').html("<div class=\"errorText\">" + message + "</div>");
+            }
+            
+            function showLoading() {
+                $('#errorTextContainer').html("<div class=\"lds-ellipsis\"><div></div><div></div><div></div><div></div></div>");
+            }
+            
+            function hideLoading() {
+                $('#errorTextContainer').html("");
+            }
+            
         </script>
     </body>
 </html>

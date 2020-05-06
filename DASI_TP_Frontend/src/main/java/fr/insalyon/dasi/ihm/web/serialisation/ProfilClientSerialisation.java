@@ -18,10 +18,13 @@ public class ProfilClientSerialisation extends Serialisation {
     @Override
     public void serialiser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Client client = (Client)request.getAttribute("client");
+        // We can send a generic error message in the serialisation.
+        // This can be set to a specific message in an Action.
+        String errorMessage = (String)request.getAttribute("errorMessage");
         
         JsonObject container = new JsonObject();
 
-        Boolean connexion = (client != null);
+        Boolean connexion = (client != null && errorMessage == null);
         container.addProperty("connexion", connexion);
 
         if (client != null) {
@@ -32,6 +35,10 @@ public class ProfilClientSerialisation extends Serialisation {
             jsonClient.addProperty("mail", client.getMail());
 
             container.add("client", jsonClient);
+        }
+        
+        if(errorMessage != null) {
+            container.addProperty("errorMessage", errorMessage);
         }
         
         response.setContentType("application/json;charset=UTF-8");

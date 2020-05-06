@@ -231,7 +231,8 @@ body {
 }
 
 .errorTextContainer {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
     display: flex;
     justify-content: center;
     
@@ -241,4 +242,5 @@ body {
     margin-top: 25px;
     margin-bottom: 10px;
     color: #f53158;
+    text-align: center;
 }
