@@ -15,9 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import fr.insalyon.dasi.ihm.web.serialisation.Serialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilClientSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.EmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.action.Action;
 import fr.insalyon.dasi.ihm.web.action.AuthentifierClientAction;
 import fr.insalyon.dasi.ihm.web.action.GetLoggedInClientAction;
+import fr.insalyon.dasi.ihm.web.action.AuthenticateEmployeAction;
 import fr.insalyon.dasi.dao.JpaUtil;
 import fr.insalyon.dasi.ihm.web.action.GetProfilAstralAction;
 import fr.insalyon.dasi.ihm.web.action.SInscrireAction;
@@ -78,6 +80,9 @@ public class ActionServlet extends HttpServlet {
                     action = new GetProfilAstralAction();
                     serialisation = new ProfilAstralSerialisation();
                     break;
+                case "connecterEmploye":
+                    action = new AuthenticateEmployeAction();
+                    serialisation = new EmployeSerialisation();
             }
         }
         

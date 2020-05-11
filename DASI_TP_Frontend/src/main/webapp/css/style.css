@@ -16,12 +16,19 @@ and open the template in the editor.
     Dark purple: #0a0f50 (rgb(10, 15, 80))
     Light pink: #ffedef
     Pink: #f76583 (rgb(247, 101, 131))
+    Blue: #71a9ec
+    Light blue: #d1deef
     Error red: #f53158
 */
 
 @font-face{ 
     font-family: OpenSans;
     src: url(../resources/font/OpenSans-Regular.ttf);
+}
+
+@font-face{
+    font-family: OpenSansBold;
+    src: url(../resources/font/OpenSans-Bold.ttf);
 }
 
 body {
@@ -74,13 +81,25 @@ body {
     color: #0a0f50;
 }
 
+.blue {
+    color: #71a9ec;
+}
+
 .lightPinkBack {
     background: #ffedef;
+}
+
+.lightBlueBack {
+    background: #d1deef;
 }
 
 .purpleBack {
     background: #0a0f50;
     color: white;
+}
+
+.bold {
+    font-family: OpenSansBold;
 }
 
 .flexRight {
@@ -106,6 +125,10 @@ body {
 
 .bigText {
     font-size: 20pt;
+}
+
+.hugeText {
+    font-size: 30pt;
 }
 
 .zodiacIconsContainer {
@@ -167,6 +190,19 @@ body {
     cursor: pointer;
     border: 2px solid #f76583;
     color: #f76583;
+    transition: 0.5s;
+}
+
+.fullBlueHover:hover {
+    cursor: pointer;
+    color: #71a9ec;
+    transition: 0.5s;
+}
+
+.bareBlueHover:hover {
+    cursor: pointer;
+    border: 2px solid #71a9ec;
+    color: #71a9ec;
     transition: 0.5s;
 }
 
