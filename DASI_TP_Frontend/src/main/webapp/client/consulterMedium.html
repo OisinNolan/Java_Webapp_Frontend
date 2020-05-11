@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Consulter Médium</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/consulterMediums.css">
+    </head>
+    <body>
+        <nav class='navbar'>
+            <a href='../index.html'><img src='../resources/img/pink_logo.png' alt='small_logo' class='navLogo'/></a>
+            <a href='profile.html' class='smallText pink navItem'>Profil Astral</a>
+            <a href='' class='smallText pink navItem'>Consulter Médium</a>
+            <a class='smallText pink flexRight' id='navText'></a>
+        </nav>
+        <div class='content'>
+            <div class="mainContainer lightPinkBack purple">
+                <div class='bigText'>Médiums Disponibles</div>
+                <div class='mediumSection' id='spiritesSection'>
+                    <hr class='purple sectionHeader'/>
+                    <div class='sectionTitle mediumText'>Spirites</div>
+                    <div class='mediumCard'>
+                        <div class='cardBody'>
+                            <div class='cardLeftPanel'>
+                                <img src="../resources/img/medium/1.png" class='mediumPic'/>
+                            </div>
+                            <div class='cardRightPanel'>
+                                <div class='mediumName mediumText'>Mr. Médium</div>
+                                <div class='mediumInfo'><span class='mediumInfoType'>Other thing:</span> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+                                <div class='mediumInfo'><span class='mediumInfoType'>Support:</span> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+                            </div>
+                        </div>
+                        <div class='cardFooter'><button class='fullBtnPurple'>Consulter</button></div>
+                    </div>
+                </div>
+                <div class='mediumSection' id='cartomanciensSection'>
+                    <hr class='purple sectionHeader'/>
+                    <div class='sectionTitle mediumText'>Cartomanciens</div>
+                </div>
+                <div class='mediumSection' id='astrologuesSection'>
+                    <hr class='purple sectionHeader'/>
+                    <div class='sectionTitle mediumText'>Astrologues</div>
+                </div>
+            </div>
+        </div>
+        <script>
+            
+            let mediums = new Map();
+            
+            $(document).ready( function () {
+                let m = {
+                    genre: 'male',
+                    nom: 'Oisín',
+                    id: 1,
+                    attrs: {
+                        Support: "crystal ball",
+                        College: "INSA Lyon -- big ups! year of 2020"
+                    }
+                };
+                
+                // When we read the mediums from the ajax response
+                // we add them to the map with id as key.
+                mediums.set(m.id, m);
+                
+                // Then, based on whether or not the response indicates
+                // that a medium has been selected, we can either
+                // display all the mediums with selected=false,
+                // or we can display only the selected medium with
+                // selected=true.
+                let cardHtml = generateCardHtml(m, false);
+                console.log(cardHtml);
+                $('#cartomanciensSection').append(cardHtml);
+            });
+            
+            function selectMedium(mediumId) {
+                let medium = mediums.get(mediumId);
+                
+                // Change title to indicate that medium has been selected
+                $('.mainContainer').html("<div class='bigText'>Médium actuellement sélectionné pour la consultation.</div><hr class='purple sectionHeader'/><div class='mediumSection' id='selectedMediumSection'></div>");
+                
+                let cardHtml = generateCardHtml(medium, true);
+                $('#selectedMediumSection').append(cardHtml);
+            }
+            
+            function generateCardHtml(medium, selected) {
+                console.log(medium);
+                let htmlString = "<div class='mediumCard " + (selected ? "selectedCard" : "" ) + "'> <div class='cardBody'> <div class='cardLeftPanel'> <img src='../resources/img/medium/" + medium.id + ".png' class='mediumPic'/> </div> <div class='cardRightPanel'> <div class='mediumName mediumText'>" + medium.nom + "</div>";
+                for(let attr in medium.attrs) {
+                    htmlString += "<div class='mediumInfo'><span class='mediumInfoType'>" + attr + ":</span>" + medium.attrs[attr] + "</div>";
+                }
+                htmlString += "</div></div>";
+                if(!selected) {
+                    htmlString += "<div class='cardFooter'><button class='fullBtnPurple' onclick='selectMedium(" + medium.id + ")'>Consulter</button></div>";
+                }
+                htmlString +=   "</div>";
+
+                return htmlString;
+            }
+            
+        </script>
+    </body>
+</html>

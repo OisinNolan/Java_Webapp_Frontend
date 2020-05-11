@@ -1,0 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11 May 2020, 14:04:16
+    Author     : oisinnolan
+*/
+
+.mainContainer {
+    margin-top: 50px;
+    width: 50%;
+    margin-left: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.mediumSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionHeader {
+    width: 100%;
+}
+
+.mediumCard {
+    background: white;
+    border-radius: 4px;
+    margin-top: 10px;
+    -webkit-box-shadow: 0px 3px 13px 0px rgba(0,0,0,0.18);
+    -moz-box-shadow: 0px 3px 13px 0px rgba(0,0,0,0.18);
+    box-shadow: 0px 3px 13px 0px rgba(0,0,0,0.18);
+}
+
+.cardBody {
+    display: flex;
+}
+
+.cardLeftPanel {
+   width: 25%;
+   justify-content: center;
+   display: flex;
+   padding-top: 10px;
+}
+
+.cardRightPanel {
+   width: 75%;
+   padding: 10px;
+   padding-left: 0;
+}
+
+.mediumPic {
+    width: 100px;
+    height: 100px;
+}
+
+.cardFooter {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 10px
+}
+
+.selectedCard {
+    border: 3px solid #f76583;
+}

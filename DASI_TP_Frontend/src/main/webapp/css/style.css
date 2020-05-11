@@ -56,6 +56,10 @@ body {
     font-size: 11pt;
 }
 
+.mediumText {
+    font-size: 14pt;
+}
+
 .logoText {
     font-size: 70pt;
     margin-bottom: -28px;
