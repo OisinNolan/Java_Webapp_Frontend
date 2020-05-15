@@ -5,25 +5,22 @@
  */
 package fr.insalyon.dasi.ihm.web.action;
 
-import fr.insalyon.dasi.metier.modele.Client;
+import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.service.Service;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author oisinnolan
+ * @author pitf9
  */
-public class GetProfilAstralAction extends Action  {
+public class GetMediumsDisponiblesAction extends Action{
+    
     @Override
     public void executer(HttpServletRequest request) {
-
-        HttpSession session = request.getSession();
-        Long idClient = (Long) session.getAttribute("idClient");
         
         Service service = new Service();
-        Client client = service.rechercherClientParId(idClient);
-        request.setAttribute("profilAstral", client.getProfilAstral());
-        
+        List<Medium> mediums = service.listerMediums();
+        request.setAttribute("mediums", mediums);
     }
 }
