@@ -29,6 +29,7 @@ import fr.insalyon.dasi.ihm.web.action.GetTravailEnCoursAction;
 import fr.insalyon.dasi.ihm.web.action.SInscrireAction;
 import fr.insalyon.dasi.ihm.web.action.CommencerConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.GenererPredictionAction;
+import fr.insalyon.dasi.ihm.web.action.ValiderConsultationAction;
 import fr.insalyon.dasi.ihm.web.serialisation.ConsultationDonneesSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.GeneralSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.MediumsSerialisation;
@@ -116,6 +117,10 @@ public class ActionServlet extends HttpServlet {
                     break;
                 case "genererPrediction":
                     action = new GenererPredictionAction();
+                    serialisation = new GeneralSerialisation();
+                    break;
+                case "validerConsultation":
+                    action = new ValiderConsultationAction();
                     serialisation = new GeneralSerialisation();
                     break;
             }
