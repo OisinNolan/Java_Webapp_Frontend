@@ -27,6 +27,7 @@ import fr.insalyon.dasi.ihm.web.action.GetMediumsDisponiblesAction;
 import fr.insalyon.dasi.ihm.web.action.GetProfilAstralAction;
 import fr.insalyon.dasi.ihm.web.action.GetTravailEnCoursAction;
 import fr.insalyon.dasi.ihm.web.action.SInscrireAction;
+import fr.insalyon.dasi.ihm.web.action.CommencerConsultationAction;
 import fr.insalyon.dasi.ihm.web.serialisation.ConsultationDonneesSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.GeneralSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.MediumsSerialisation;
@@ -107,6 +108,10 @@ public class ActionServlet extends HttpServlet {
                 case "getDonneesConsultation":
                     action = new GetDonneesConsultationAction();
                     serialisation = new ConsultationDonneesSerialisation();
+                    break;
+                case "commencerConsultation":
+                    action = new CommencerConsultationAction();
+                    serialisation = new GeneralSerialisation();
                     break;
             }
         }
