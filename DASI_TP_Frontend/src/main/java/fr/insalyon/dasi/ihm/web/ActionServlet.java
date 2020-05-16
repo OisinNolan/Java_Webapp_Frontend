@@ -31,6 +31,7 @@ import fr.insalyon.dasi.ihm.web.serialisation.ConsultationDonneesSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.GeneralSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.MediumsSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilAstralSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.TravailSerialisation;
 /**
  *
  * @author oisinnolan
@@ -101,7 +102,7 @@ public class ActionServlet extends HttpServlet {
                     break;
                 case "getTravailEnCours":
                     action = new GetTravailEnCoursAction();
-                    serialisation = new EmployeSerialisation();//TODO: serialize travail
+                    serialisation = new TravailSerialisation();
                     break;
                 case "getDonneesConsultation":
                     action = new GetDonneesConsultationAction();
