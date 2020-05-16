@@ -6,11 +6,63 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Travail Actif</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/travail.css">
+        <script src="https://kit.fontawesome.com/cf7a3548ef.js" crossorigin="anonymous"></script>
     <body>
-        <div>Employees only !!!</div>
+        <nav class='navbar'>
+            <a href='index.html'><img src='../resources/img/blue_logo.png' alt='small_logo' class='navLogo'/></a>
+            <a class='mediumText blue bold navItem'>Employé</a>
+        </nav>
+        <div class='content'>
+            <div class='travailContainer lightBlueBack'>
+                <div class='bigText travailTitle'>Travail actif</div>
+                <hr class='purple'/>
+                <div class='travailCard'>
+                    <div class='leftSegment'>
+                        <div class='cardTitle'>Consultation avec <span id='nomClient'></span></div>
+                        <div class='cardData smallText'>
+                            • Comme <span id='mediumChoisi'></span>
+                        </div>
+                        <div class='cardData smallText'>
+                            • Demandée le <span id='dateDemande'></span> à <span id='heureDemande'></span>
+                        </div>
+                    </div>
+                    <div class='rightSegment'>
+                        <a href='#'><i class="fas fa-angle-right purple"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready( function () {
+                getTravailActuel();
+            });
+            
+            function getTravailActuel() {
+                $.ajax({
+                        url: '../ActionServlet',
+                        method: 'GET',
+                        data: {
+                            todo: 'getTravailEnCours'
+                        },
+                        dataType: 'json'
+                    })
+                    .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
+                        console.log('Response',response); // LOG dans Console Javascript
+                    })
+                    .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
+                        console.log('Error',error); // LOG dans Console Javascript
+                        alert("Erreur lors de l'appel AJAX");
+                    })
+                    .always( function () { // Fonction toujours appelée
+                        
+                });
+            }
+        </script>
     </body>
 </html>

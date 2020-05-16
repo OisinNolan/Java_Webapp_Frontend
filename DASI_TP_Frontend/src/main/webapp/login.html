@@ -41,8 +41,8 @@
             $(document).ready( function () {
                 $('#connexionBtn').on( 'click', function () { // Fonction appelée lors du clic sur le bouton
 
-                    console.log("clic sur le bouton de connexion"); // LOG dans Console Javascript
-
+                    showLoading();
+                    
                     // Récupération de la valeur des champs du formulaire
                     var champLogin = $('#mailInput').val();
                     var champPassword = $('#mdpInput').val();
@@ -72,10 +72,18 @@
                         alert("Erreur lors de l'appel AJAX");
                     })
                     .always( function () { // Fonction toujours appelée
-                        
+                        hideLoading();
                     });
                 });
             });
+            
+            function showLoading() {
+                $('#errorTextContainer').html("<div class=\"lds-ellipsis\"><div></div><div></div><div></div><div></div></div>");
+            }
+            
+            function hideLoading() {
+                $('#errorTextContainer').html("");
+            }
         </script>
     </body>
 </html>
