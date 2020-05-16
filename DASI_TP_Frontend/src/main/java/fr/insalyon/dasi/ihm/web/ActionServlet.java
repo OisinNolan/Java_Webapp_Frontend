@@ -29,11 +29,13 @@ import fr.insalyon.dasi.ihm.web.action.GetTravailEnCoursAction;
 import fr.insalyon.dasi.ihm.web.action.SInscrireAction;
 import fr.insalyon.dasi.ihm.web.action.CommencerConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.GenererPredictionAction;
+import fr.insalyon.dasi.ihm.web.action.GetStatistiquesAction;
 import fr.insalyon.dasi.ihm.web.action.ValiderConsultationAction;
 import fr.insalyon.dasi.ihm.web.serialisation.ConsultationDonneesSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.GeneralSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.MediumsSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilAstralSerialisation;
+import fr.insalyon.dasi.ihm.web.serialisation.StatistiquesSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.TravailSerialisation;
 /**
  *
@@ -122,6 +124,10 @@ public class ActionServlet extends HttpServlet {
                 case "validerConsultation":
                     action = new ValiderConsultationAction();
                     serialisation = new GeneralSerialisation();
+                    break;
+                case "GetStatistiques":
+                    action = new GetStatistiquesAction();
+                    serialisation = new StatistiquesSerialisation();
                     break;
             }
         }
