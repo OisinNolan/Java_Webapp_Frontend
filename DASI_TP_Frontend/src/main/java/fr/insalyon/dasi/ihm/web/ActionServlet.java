@@ -72,7 +72,7 @@ public class ActionServlet extends HttpServlet {
         
         if (todo != null) {
             switch (todo) {
-                case "connecter":
+                case "connecterClient":
                     action = new AuthentifierClientAction();
                     serialisation = new ProfilClientSerialisation();
                     break;
