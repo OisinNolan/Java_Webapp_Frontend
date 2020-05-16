@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author oisinnolan
  */
-public class GetLoggedInClientAction extends Action {
+public class GetClientConnecte extends Action {
     @Override
     public void executer(HttpServletRequest request) {
 
