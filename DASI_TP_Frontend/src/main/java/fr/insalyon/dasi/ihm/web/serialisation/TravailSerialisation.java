@@ -8,38 +8,42 @@ package fr.insalyon.dasi.ihm.web.serialisation;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import fr.insalyon.dasi.metier.modele.ProfilAstral;
+import fr.insalyon.dasi.metier.modele.Consultation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
- * @author oisinnolan
+ * @author pitf9
  */
-public class ProfilAstralSerialisation extends Serialisation {
+public class TravailSerialisation extends Serialisation {
     
     @Override
     public void serialiser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ProfilAstral profilAstral = (ProfilAstral)request.getAttribute("profilAstral");
+        Consultation travail = (Consultation)request.getAttribute("travail");
         
         String errorMessage = (String)request.getAttribute("errorMessage");
         
         JsonObject container = new JsonObject();
 
-        Boolean connexion = (profilAstral != null && errorMessage == null);
+        Boolean connexion = (travail != null && errorMessage == null);
         container.addProperty("connexion", connexion);
-
-        if (profilAstral != null) {
+        
+        if (travail != null) {
+            JsonObject jsonTravail = new JsonObject();
+            jsonTravail.addProperty("id", travail.getId());
+            jsonTravail.addProperty("demande", travail.getDateCreation().toString());
+            jsonTravail.addProperty("medium", travail.getMedium().getDenomination());
+            
             JsonObject jsonClient = new JsonObject();
-            jsonClient.addProperty("animalTotem", profilAstral.getAnimalTotem());
-            jsonClient.addProperty("couleur", profilAstral.getCouleur());
-            jsonClient.addProperty("signeChinois", profilAstral.getSigneChinois());
-            jsonClient.addProperty("signeZodiaque", profilAstral.getSigneZodiaque());                    
-
-            container.add("profilAstral", jsonClient);
+            jsonClient.addProperty("id", travail.getClient().getId());
+            jsonClient.addProperty("nom", travail.getClient().getNom());
+            jsonClient.addProperty("prenom", travail.getClient().getPrenom());
+            
+            jsonTravail.add("client", jsonClient);
+            container.add("travail", jsonTravail);
         }
         
         if(errorMessage != null) {

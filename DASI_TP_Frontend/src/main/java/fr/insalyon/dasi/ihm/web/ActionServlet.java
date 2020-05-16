@@ -22,10 +22,12 @@ import fr.insalyon.dasi.ihm.web.action.GetClientConnecte;
 import fr.insalyon.dasi.ihm.web.action.AuthentifierEmployeAction;
 import fr.insalyon.dasi.dao.JpaUtil;
 import fr.insalyon.dasi.ihm.web.action.DemanderConsultationAction;
+import fr.insalyon.dasi.ihm.web.action.GetDonneesConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.GetMediumsDisponiblesAction;
 import fr.insalyon.dasi.ihm.web.action.GetProfilAstralAction;
 import fr.insalyon.dasi.ihm.web.action.GetTravailEnCoursAction;
 import fr.insalyon.dasi.ihm.web.action.SInscrireAction;
+import fr.insalyon.dasi.ihm.web.serialisation.ConsultationDonneesSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.GeneralSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.MediumsSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilAstralSerialisation;
@@ -99,7 +101,11 @@ public class ActionServlet extends HttpServlet {
                     break;
                 case "getTravailEnCours":
                     action = new GetTravailEnCoursAction();
-                    serialisation = new EmployeSerialisation();
+                    serialisation = new EmployeSerialisation();//TODO: serialize travail
+                    break;
+                case "getDonneesConsultation":
+                    action = new GetDonneesConsultationAction();
+                    serialisation = new ConsultationDonneesSerialisation();
                     break;
             }
         }

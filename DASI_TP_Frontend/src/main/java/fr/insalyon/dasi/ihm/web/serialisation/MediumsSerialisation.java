@@ -36,8 +36,9 @@ public class MediumsSerialisation extends Serialisation {
         Boolean connexion = (mediums != null && idMediumChoisi != null && errorMessage == null);
         container.addProperty("connexion", connexion);
         
-        JsonArray jsonMediums = new JsonArray();
         if (mediums != null){
+            JsonArray jsonMediums = new JsonArray();
+            
             for (Medium m : mediums) {
                 JsonObject jsonMedium = new JsonObject();
                 
@@ -89,13 +90,16 @@ public class MediumsSerialisation extends Serialisation {
                 // Append Medium to the list
                 jsonMediums.add(jsonMedium);
             }
+            container.add("mediums", jsonMediums);
         }     
-        container.add("mediums", jsonMediums);
         
-        // Indicate the Medium chosen for current consultation
-        JsonObject jsonIdMediumChoisi = new JsonObject();
-        jsonIdMediumChoisi.addProperty("id", idMediumChoisi);
-        container.add("mediumChoisi", jsonIdMediumChoisi);
+        
+        if (idMediumChoisi != null) {
+            // Indicate the Medium chosen for current consultation
+            JsonObject jsonIdMediumChoisi = new JsonObject();
+            jsonIdMediumChoisi.addProperty("id", idMediumChoisi);
+            container.add("mediumChoisi", jsonIdMediumChoisi);
+        }
         
         
         if (errorMessage != null) {
