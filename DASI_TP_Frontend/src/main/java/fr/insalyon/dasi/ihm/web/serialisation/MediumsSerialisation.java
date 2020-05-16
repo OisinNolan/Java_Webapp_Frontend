@@ -28,12 +28,12 @@ public class MediumsSerialisation extends Serialisation {
     @Override
     public void serialiser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<Medium> mediums = (List<Medium>)request.getAttribute("mediums");
-        
+        Long idMediumChoisi = (Long)request.getAttribute("idMediumChoisi");
         String errorMessage = (String)request.getAttribute("errorMessage");
         
         JsonObject container = new JsonObject();
         
-        Boolean connexion = (mediums != null &&errorMessage == null);
+        Boolean connexion = (mediums != null && idMediumChoisi != null && errorMessage == null);
         container.addProperty("connexion", connexion);
         
         JsonArray jsonMediums = new JsonArray();
@@ -92,7 +92,11 @@ public class MediumsSerialisation extends Serialisation {
         }     
         container.add("mediums", jsonMediums);
         
-        System.out.println(container);
+        // Indicate the Medium chosen for current consultation
+        JsonObject jsonIdMediumChoisi = new JsonObject();
+        jsonIdMediumChoisi.addProperty("id", idMediumChoisi);
+        container.add("mediumChoisi", jsonIdMediumChoisi);
+        
         
         if (errorMessage != null) {
             container.addProperty("errorMessage", errorMessage);

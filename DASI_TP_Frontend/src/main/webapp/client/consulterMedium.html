@@ -57,7 +57,11 @@ and open the template in the editor.
                     .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
                         console.log('Response',response); // LOG dans Console Javascript
                         if (response.connexion) {
-                            response.mediums.forEach(display)
+                            response.mediums.forEach(display);
+                            
+                            // Currently chosen Medium id
+                            // If -1 no Medium has been selected
+                            console.log("Medium choisi", response.mediumChoisi.id);
                         }
                     })
                     .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
