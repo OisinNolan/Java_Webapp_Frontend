@@ -33,7 +33,7 @@ and open the template in the editor.
                         </div>
                     </div>
                     <div class='rightSegment'>
-                        <a href='#'><i class="fas fa-angle-right purple"></i></a>
+                        <a href='profilClient.html'><i class="fas fa-angle-right purple"></i></a>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@ and open the template in the editor.
                         if(response.travailActuel) {
                             console.log('Response',response); // LOG dans Console Javascript
                         } else {
-                            $('#travailCard').html("<div class='cardTitle'>Aucun travail actif en ce moment.</div>")
+                            $('#travailCard').html("<div class='cardTitle'>Aucun travail actif en ce moment.</div>");
                         }
                     })
                     .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX

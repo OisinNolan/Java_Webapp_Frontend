@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Profil Client</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/profilClient.css">
+        <script src="https://kit.fontawesome.com/cf7a3548ef.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <nav class='navbar'>
+            <a href='index.html'><img src='../resources/img/blue_logo.png' alt='small_logo' class='navLogo'/></a>
+            <a class='mediumText blue bold navItem'>Employé</a>
+        </nav>
+        <div class='content'>
+            <div class='profilContainer lightBlueBack'>
+                <div class='profilHeader bigText'><a href='travail.html' class='backLink'><i class="fas fa-angle-left purple"></i></a><span id='nomClient'>Alice PASCAL</span><div></div></div>
+                <div class='cardContainer'>
+                    <div class='card'>
+                        <div class='cardTitle mediumText'>Profil Zodiaque</div>
+                        <hr class='purple cardDivider'/>
+                        <div class='cardData'>
+                            Signe du zodiaque : <span id='signeZodiaque'></span>
+                        </div>
+                        <div class='cardData'>
+                            Signe astrologique chinois : <span id='signeChinois'></span>
+                        </div>
+                        <div class='cardData'>
+                            Couleur porte-bonheur : <span id='couleur'></span>
+                        </div>
+                        <div class='cardData'>
+                            Animal totem : <span id='animalTotem'></span>
+                        </div>
+                    </div>
+                    <div class='card' id='consultationCard'>
+                        <div class='cardTitle mediumText' id='consultationCardTitle'>
+                            <span id='commencerTitle'>Commencer Consultation</span>
+                            <i class="fas fa-plus purple commencerConsultationBtn" onclick='commencerConsultation()'></i>
+                        </div>
+                        
+                    </div>
+                    <div class='card'>
+                        <div class='cardTitle mediumText'>
+                            Historique des consultation
+                        </div>
+                        <hr class='purple cardDivider'/>
+                        <div class='historyContainer'>
+                            <div class='historyEntry' onclick='toggleHistoryExpand()'>
+                                <div class='historyTitle'>
+                                    <span id='historyData'>03/12/1998</span>
+                                    <span id='historyMedium'>Mr. Médium</span>
+                                    <div class='dropdownBtn'>
+                                        <i class="fas fa-angle-down purple" id='historyEntry1Btn'></i>
+                                    </div>
+                                </div>
+                                <span id='historyEntry1'></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            
+            let consultationHtml = "<hr class='purple cardDivider'/> <div class='cardData'> Durée : <span id='consultationDuration'></span> </div> <div class='subcard'> <div class='subcardTitle'>Prédiction Automatique</div> <hr class='purple cardDivider'/> <div class='cardData predictionInputContainer'> <input type='text' class='predictionInput' id='amour' placeholder='Amour'> <input type='text' class='predictionInput' id='sante' placeholder='Santé'> <input type='text' class='predictionInput' id='travail' placeholder='Travail'> <button class='fullBtnPurple fullBlueHover calculateBtn'>Calculer <i class='fas fa-arrow-down'></i></button> </div> <textarea class='cardTextarea' readonly></textarea> </div> <div class='subcard'> <div class='subcardTitle'>Commentaires</div> <hr class='purple cardDivider'/> <textarea class='cardTextarea commentArea'></textarea> </div>";
+            
+            function commencerConsultation() {
+                $('#consultationCard').append(consultationHtml);
+                $('#consultationCardTitle').html("Consultation comme *nom-médium*");
+            }
+            
+            function toggleHistoryExpand() {
+                let elem = $('#historyEntry1');
+                let elemBtn = $('#historyEntry1Btn');
+                
+                if(elem.attr('expanded') === 'true') {
+                    elem.html("");
+                    elem.attr('expanded', 'false');
+                    elemBtn.removeClass('fa-angle-up');
+                    elemBtn.addClass('fa-angle-down');
+                } else {
+                    elem.append("<hr class='purple cardDivider'/><div>A great consultation indeed !</div>");
+                    elem.attr('expanded', 'true');
+                    elemBtn.removeClass('fa-angle-down');
+                    elemBtn.addClass('fa-angle-up');
+                }
+            }
+            
+        </script>
+    </body>
+</html>

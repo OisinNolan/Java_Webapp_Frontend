@@ -1,0 +1,139 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16 May 2020, 16:53:14
+    Author     : oisinnolan
+*/
+
+.profilContainer {
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 50px;
+    border-radius: 4px;
+    padding: 10px;
+    padding-bottom: 5px;
+}
+
+.profilHeader {
+    display: flex;
+    justify-content: space-between;
+} 
+
+.card {
+    background: white;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.backLink {
+}
+
+.cardContainer {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardTitle {
+    display: flex;
+    align-items: center;
+}
+
+.cardDivider {
+    width: 100%;
+}
+
+.cardData {
+    margin: 5px;
+}
+
+.commencerConsultationBtn {
+    margin-left: auto;
+}
+
+.commencerConsultationBtn:hover {
+    cursor: pointer;
+    color: #71a9ec;
+    transition: 0.5s;
+}
+
+.historyContainer {
+    display: flex;
+    flex-direction: column;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.historyEntry {
+    border: 2px solid #0a0f50;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.historyTitle {
+    display: flex;
+}
+
+.historyTitle:hover {
+    cursor: pointer;
+}
+
+.dropdownBtn {
+    margin-left: auto;
+}
+
+.subcard {
+    border: 2px solid #0a0f50;
+    border-radius: 4px;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.subcardTitle {
+    padding: 5px;
+}
+
+.predictionInputContainer {
+    display: flex;
+    justify-content: space-between
+}
+
+.predictionInput {
+    width: 22%;
+    background: #cccccc;
+    border: none;
+    border-radius: 4px;
+    font-size: 11pt;
+    padding: 5px;
+}
+
+.calculateBtn {
+    width: 22%;
+    font-size: 11pt;
+    padding: 5px;
+    margin: 0px;
+}
+
+.cardTextarea {
+    width: 97.5%;
+    height: 50px;
+    overflow-y: scroll;
+    resize: vertical;
+    border: 2px solid #0a0f50;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.commentArea {
+    height: 100px;
+}
