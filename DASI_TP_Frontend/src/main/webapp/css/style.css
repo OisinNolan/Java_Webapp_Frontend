@@ -284,3 +284,9 @@ body {
     color: #f53158;
     text-align: center;
 }
+
+.employeLoginLinkContainer {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
