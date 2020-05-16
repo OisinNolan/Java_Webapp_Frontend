@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author oisinnolan
  */
-public class AuthenticateEmployeAction extends Action {
+public class AuthentifierEmployeAction extends Action {
     
     @Override
     public void executer(HttpServletRequest request) {

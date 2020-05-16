@@ -18,12 +18,13 @@ import fr.insalyon.dasi.ihm.web.serialisation.ProfilClientSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.EmployeSerialisation;
 import fr.insalyon.dasi.ihm.web.action.Action;
 import fr.insalyon.dasi.ihm.web.action.AuthentifierClientAction;
-import fr.insalyon.dasi.ihm.web.action.GetLoggedInClientAction;
-import fr.insalyon.dasi.ihm.web.action.AuthenticateEmployeAction;
+import fr.insalyon.dasi.ihm.web.action.GetClientConnecte;
+import fr.insalyon.dasi.ihm.web.action.AuthentifierEmployeAction;
 import fr.insalyon.dasi.dao.JpaUtil;
 import fr.insalyon.dasi.ihm.web.action.DemanderConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.GetMediumsDisponiblesAction;
 import fr.insalyon.dasi.ihm.web.action.GetProfilAstralAction;
+import fr.insalyon.dasi.ihm.web.action.GetTravailEnCoursAction;
 import fr.insalyon.dasi.ihm.web.action.SInscrireAction;
 import fr.insalyon.dasi.ihm.web.serialisation.GeneralSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.MediumsSerialisation;
@@ -76,11 +77,11 @@ public class ActionServlet extends HttpServlet {
                     action = new SInscrireAction();
                     serialisation = new ProfilClientSerialisation();
                     break;
-                case "getLoggedInClient":
-                    action = new GetLoggedInClientAction();
+                case "getClientConnecte":
+                    action = new GetClientConnecte();
                     serialisation = new ProfilClientSerialisation();
                     break;
-                case "getProfilAstralOfLoggedInClient":
+                case "getProfilAstral":
                     action = new GetProfilAstralAction();
                     serialisation = new ProfilAstralSerialisation();
                     break;
@@ -93,7 +94,11 @@ public class ActionServlet extends HttpServlet {
                     serialisation = new GeneralSerialisation();
                     break;
                 case "connecterEmploye":
-                    action = new AuthenticateEmployeAction();
+                    action = new AuthentifierEmployeAction();
+                    serialisation = new EmployeSerialisation();
+                    break;
+                case "getTravailEnCours":
+                    action = new GetTravailEnCoursAction();
                     serialisation = new EmployeSerialisation();
                     break;
             }
