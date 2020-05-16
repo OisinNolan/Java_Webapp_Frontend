@@ -291,6 +291,14 @@ body {
     padding: 10px;
 }
 
+.show {
+    visibility: visible;
+}
+
+.hide {
+    visibility: collapse; 
+}
+
 /* Snackbar styles -- snackbar code from w3schools
 /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {

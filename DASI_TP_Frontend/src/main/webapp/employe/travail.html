@@ -22,7 +22,7 @@ and open the template in the editor.
             <div class='travailContainer lightBlueBack'>
                 <div class='bigText travailTitle'>Travail actif</div>
                 <hr class='purple'/>
-                <div class='travailCard'>
+                <div class='travailCard' id='travailCard'>
                     <div class='leftSegment'>
                         <div class='cardTitle'>Consultation avec <span id='nomClient'></span></div>
                         <div class='cardData smallText'>
@@ -53,7 +53,11 @@ and open the template in the editor.
                         dataType: 'json'
                     })
                     .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
-                        console.log('Response',response); // LOG dans Console Javascript
+                        if(response.travailActuel) {
+                            console.log('Response',response); // LOG dans Console Javascript
+                        } else {
+                            $('#travailCard').html("<div class='cardTitle'>Aucun travail actif en ce moment.</div>")
+                        }
                     })
                     .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
                         console.log('Error',error); // LOG dans Console Javascript
