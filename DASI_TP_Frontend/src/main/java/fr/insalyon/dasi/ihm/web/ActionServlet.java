@@ -25,6 +25,7 @@ import fr.insalyon.dasi.ihm.web.action.DemanderConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.GetMediumsDisponiblesAction;
 import fr.insalyon.dasi.ihm.web.action.GetProfilAstralAction;
 import fr.insalyon.dasi.ihm.web.action.SInscrireAction;
+import fr.insalyon.dasi.ihm.web.serialisation.GeneralSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.MediumsSerialisation;
 import fr.insalyon.dasi.ihm.web.serialisation.ProfilAstralSerialisation;
 /**
@@ -89,7 +90,7 @@ public class ActionServlet extends HttpServlet {
                     break;
                 case "demanderConsultation":
                     action = new DemanderConsultationAction();
-                    serialisation = new MediumsSerialisation();
+                    serialisation = new GeneralSerialisation();
                     break;
                 case "connecterEmploye":
                     action = new AuthenticateEmployeAction();

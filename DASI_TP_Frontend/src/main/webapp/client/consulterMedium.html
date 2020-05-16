@@ -37,6 +37,7 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
+        <div id="snackbar"></div>
         <script>
             
             let mediums = new Map();
@@ -95,12 +96,12 @@ and open the template in the editor.
                             // If mediumChoisi == -1, no medium has been selected
                             // so we display all available mediums.
                             // Otherwise we display only the selected medium.
-                            if(response.mediumChoisi.id === -1) {
-                                mediums.forEach(medium => {
-                                    display(medium);
-                                })
+                            if(mediums.has(response.mediumChoisi.id.toString())) {
+                                display(mediums.get(response.mediumChoisi.id.toString()), true);
                             } else {
-                                selectMedium(response.mediumChoisi.id);
+                                mediums.forEach(medium => {
+                                    display(medium, false);
+                                });
                             }
                         }
                     })
@@ -113,29 +114,54 @@ and open the template in the editor.
                 });
             }
             
-            function display(m) {
+            function display(m, selected) {
+
+                
+                let cardHtml = generateCardHtml(m, selected);
 
                 // Then, based on whether or not the response indicates
                 // that a medium has been selected, we can either
                 // display all the mediums with selected=false,
                 // or we can display only the selected medium with
                 // selected=true.
-                let cardHtml = generateCardHtml(m, false);
-                
-                let section = "#" + m.class + "Section";
-                $(section).append(cardHtml);
-                            
+                if(selected) {
+                    // Change title to indicate that medium has been selected
+                    $('.mainContainer').html("<div class='bigText'>Médium actuellement sélectionné pour la consultation.</div><hr class='purple sectionHeader'/><div class='mediumSection' id='selectedMediumSection'></div>");
+                    $('#selectedMediumSection').append(cardHtml);
+                } else {
+                    let section = "#" + m.class + "Section";
+                    $(section).append(cardHtml);
+                }            
             }
             
             function selectMedium(mediumId) {
                 
                 let medium = mediums.get(mediumId.toString());
                 
-                // Change title to indicate that medium has been selected
-                $('.mainContainer').html("<div class='bigText'>Médium actuellement sélectionné pour la consultation.</div><hr class='purple sectionHeader'/><div class='mediumSection' id='selectedMediumSection'></div>");
-                
-                let cardHtml = generateCardHtml(medium, true);
-                $('#selectedMediumSection').append(cardHtml);
+                 $.ajax({
+                        url: '../ActionServlet',
+                        method: 'GET',
+                        data: {
+                            todo: 'demanderConsultation',
+                            idMediumChoisi: mediumId
+                        },
+                        dataType: 'json'
+                    })
+                    .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
+                        if(response.message === "200") {
+                            // Display the selected medium with selected=true
+                            display(medium, true);
+                            showSnackbar("Médium choisi avec succès.");
+                        } else if(response.message === "500") {
+                            showSnackbar("Une erreur s'est produite lors de la sélection de ce médium.");
+                        }
+                    })
+                    .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
+                        console.log('Error',error); // LOG dans Console Javascript
+                        alert("Erreur lors de l'appel AJAX");
+                    })
+                    .always( function () { // Fonction toujours appelée
+                });
             }
             
             function generateCardHtml(medium, selected) {
@@ -151,6 +177,18 @@ and open the template in the editor.
                 htmlString +=   "</div>";
 
                 return htmlString;
+            }
+            
+            function showSnackbar(message) {
+                
+                let snack = document.getElementById("snackbar")
+                snack.innerHTML = message;
+                
+                // Add the "show" class to DIV
+                snack.className = "show";
+
+                // After 3 seconds, remove the show class from DIV
+                setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
             }
             
         </script>

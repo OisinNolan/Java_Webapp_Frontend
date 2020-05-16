@@ -32,9 +32,9 @@ public class DemanderConsultationAction extends Action {
         Consultation consultation = service.demanderConsultation(client, medium);
         
         if (consultation != null) {
-            request.setAttribute("idMediumChoisi", consultation.getMedium().getId());
+            request.setAttribute("message", "200");
         } else {
-            request.setAttribute("idMediumChoisi", -1L);
+            request.setAttribute("message", "500");
         }
     }
     
