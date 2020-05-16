@@ -25,8 +25,7 @@ public class AuthentifierClientAction extends Action {
         HttpSession session = request.getSession();
         if (client != null) {
             session.setAttribute("idClient", client.getId());
-        }
-        else {
+        } else {
             session.removeAttribute("idClient");
         }
     }

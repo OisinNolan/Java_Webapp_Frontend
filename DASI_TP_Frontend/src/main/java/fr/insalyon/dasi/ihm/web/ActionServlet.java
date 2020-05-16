@@ -21,6 +21,7 @@ import fr.insalyon.dasi.ihm.web.action.AuthentifierClientAction;
 import fr.insalyon.dasi.ihm.web.action.GetLoggedInClientAction;
 import fr.insalyon.dasi.ihm.web.action.AuthenticateEmployeAction;
 import fr.insalyon.dasi.dao.JpaUtil;
+import fr.insalyon.dasi.ihm.web.action.DemanderConsultationAction;
 import fr.insalyon.dasi.ihm.web.action.GetMediumsDisponiblesAction;
 import fr.insalyon.dasi.ihm.web.action.GetProfilAstralAction;
 import fr.insalyon.dasi.ihm.web.action.SInscrireAction;
@@ -84,6 +85,10 @@ public class ActionServlet extends HttpServlet {
                     break;
                 case "getMediumsDisponibles":
                     action = new GetMediumsDisponiblesAction();
+                    serialisation = new MediumsSerialisation();
+                    break;
+                case "demanderConsultation":
+                    action = new DemanderConsultationAction();
                     serialisation = new MediumsSerialisation();
                     break;
                 case "connecterEmploye":
