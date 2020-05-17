@@ -20,9 +20,10 @@ public class GetTravailEnCoursAction extends Action {
     @Override
     public void executer(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Employe employe = (Employe) session.getAttribute("employe");
+        Long employeId = (Long) session.getAttribute("idEmploye");
         
         Service service = new Service();
+        Employe employe = service.rechercherEmployeParId(employeId);
         Consultation travailEnCours = service.getConsultationEnCours(employe);
         request.setAttribute("travail", travailEnCours);
     }

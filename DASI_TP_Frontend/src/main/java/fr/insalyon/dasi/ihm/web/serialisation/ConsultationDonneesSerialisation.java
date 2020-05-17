@@ -29,7 +29,8 @@ public class ConsultationDonneesSerialisation extends Serialisation{
         Client client = (Client)request.getAttribute("client");
         ProfilAstral profilAstral = (ProfilAstral)request.getAttribute("profilAstral");
         List<Consultation> historique = (List<Consultation>)request.getAttribute("historique");
-    
+        String nomMedium = (String)request.getAttribute("nomMedium");
+        
         String errorMessage = (String)request.getAttribute("errorMessage");
         
         JsonObject container = new JsonObject();
@@ -80,6 +81,10 @@ public class ConsultationDonneesSerialisation extends Serialisation{
             }
             
             container.add("historique", jsonHistorique);
+        }
+        
+        if(nomMedium != null) {
+            container.addProperty("medium", nomMedium);
         }
         
         if(errorMessage != null) {

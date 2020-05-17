@@ -20,13 +20,11 @@ public class ValiderConsultationAction extends Action {
     @Override
     public void executer(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Long idEmploye = (Long)session.getAttribute("idEmploye");
+        Employe employe = (Employe) session.getAttribute("employe");
         
         String commentaire = request.getParameter("commentaire");
         
         Service service = new Service();
-        
-        Employe employe = service.rechercherEmployeParId(idEmploye);
         Consultation consultation = service.rechercherConsultationParId(employe.getTravailActuel());
         
         Long consultationId = service.validerConsultation(consultation, commentaire);

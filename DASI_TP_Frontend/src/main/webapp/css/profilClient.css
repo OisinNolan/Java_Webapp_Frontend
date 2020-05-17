@@ -105,16 +105,12 @@ and open the template in the editor.
 
 .predictionInputContainer {
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+    align-items: center;
 }
 
-.predictionInput {
+.slidecontainer {
     width: 22%;
-    background: #cccccc;
-    border: none;
-    border-radius: 4px;
-    font-size: 11pt;
-    padding: 5px;
 }
 
 .calculateBtn {
@@ -122,6 +118,7 @@ and open the template in the editor.
     font-size: 11pt;
     padding: 5px;
     margin: 0px;
+    height: 40px;
 }
 
 .cardTextarea {
@@ -136,4 +133,54 @@ and open the template in the editor.
 
 .commentArea {
     height: 100px;
+}
+
+.sliderTitle {
+    padding: 7px;
+    text-align: center;
+}
+
+.sliderValue {
+    font-size: 14pt;
+    text-align: center;
+}
+
+.validateButton {
+    width: 50%;
+}
+
+/*
+
+    Slider styles
+    
+    Edited from w3schools example
+
+*/
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;  
+  background: #d1deef;
+  outline: none;
+  border: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; 
+  background: #0a0f50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #0a0f50;
+  cursor: pointer;
 }

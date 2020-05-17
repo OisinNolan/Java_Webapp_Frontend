@@ -15,7 +15,7 @@ and open the template in the editor.
         <script src="https://kit.fontawesome.com/cf7a3548ef.js" crossorigin="anonymous"></script>
     <body>
         <nav class='navbar'>
-            <a href='index.html'><img src='../resources/img/blue_logo.png' alt='small_logo' class='navLogo'/></a>
+            <a href='../index.html'><img src='../resources/img/blue_logo.png' alt='small_logo' class='navLogo'/></a>
             <a class='mediumText blue bold navItem'>Employé</a>
         </nav>
         <div class='content purple'>
@@ -54,6 +54,7 @@ and open the template in the editor.
                     })
                     .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
                         if(response.connexion && response.travail) {
+                            console.log(response);
                             let travail = response.travail; 
                             let client = travail.client;
                             let demande = travail.demande;

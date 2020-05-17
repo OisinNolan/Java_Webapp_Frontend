@@ -30,12 +30,14 @@ public class GetDonneesConsultationAction extends Action {
         
         Client client = travailEnCours.getClient();
         ProfilAstral profilAstral = client.getProfilAstral();
+        String nomMedium = travailEnCours.getMedium().getDenomination();
         
         List<Consultation> historique = service.listerHistoriqueConsultations(client);
         
         request.setAttribute("client", client);
         request.setAttribute("profilAstral", profilAstral);
         request.setAttribute("historique", historique);
+        request.setAttribute("nomMedium", nomMedium);
     }
     
 }

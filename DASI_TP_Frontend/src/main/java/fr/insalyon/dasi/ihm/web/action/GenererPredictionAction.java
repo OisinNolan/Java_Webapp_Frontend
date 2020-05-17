@@ -22,16 +22,14 @@ public class GenererPredictionAction extends Action {
     @Override
     public void executer(HttpServletRequest request) {
         
-        HttpSession session = request.getSession();
-        Long idEmploye = (Long)session.getAttribute("idEmploye");
-        
         int amour = Integer.parseInt(request.getParameter("amour"));
         int sante = Integer.parseInt(request.getParameter("sante"));
         int travail = Integer.parseInt(request.getParameter("travail"));
         
-        Service service = new Service();
+        HttpSession session = request.getSession();
+        Employe employe = (Employe)session.getAttribute("employe");
         
-        Employe employe = service.rechercherEmployeParId(idEmploye);
+        Service service = new Service();
         Consultation consultation = service.rechercherConsultationParId(employe.getTravailActuel());
         
         String prediction = service.genererPrediction(consultation, amour, sante, travail);

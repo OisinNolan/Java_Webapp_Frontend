@@ -30,6 +30,8 @@ public class AuthentifierEmployeAction extends Action {
         HttpSession session = request.getSession();
         if (employe != null) {
             session.setAttribute("employe", employe);
+            // We store the id for cases in which we want updated employee data
+            session.setAttribute("idEmploye", employe.getId());
         }
         else {
             session.removeAttribute("employe");
