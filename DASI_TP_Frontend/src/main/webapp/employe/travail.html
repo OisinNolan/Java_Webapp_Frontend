@@ -53,9 +53,18 @@ and open the template in the editor.
                         dataType: 'json'
                     })
                     .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
-                        if(response.travailActuel) {
-                            console.log('Response',response); // LOG dans Console Javascript
+                        if(response.connexion && response.travail) {
+                            let travail = response.travail; 
+                            let client = travail.client;
+                            let demande = travail.demande;
+                            
+                            // Filling html in with data from response
+                            $('#nomClient').html(client.prenom + " " + client.nom);
+                            $('#mediumChoisi').html(travail.medium);
+                            $('#dateDemande').html(demande.date);
+                            $('#heureDemande').html(demande.heure);
                         } else {
+                            // Generate html component to indicate that no work is currently activ
                             $('#travailCard').html("<div class='cardTitle'>Aucun travail actif en ce moment.</div>");
                         }
                     })

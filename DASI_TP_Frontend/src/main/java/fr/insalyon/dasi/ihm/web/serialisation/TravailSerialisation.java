@@ -11,6 +11,8 @@ import com.google.gson.JsonObject;
 import fr.insalyon.dasi.metier.modele.Consultation;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,7 +36,23 @@ public class TravailSerialisation extends Serialisation {
         if (travail != null) {
             JsonObject jsonTravail = new JsonObject();
             jsonTravail.addProperty("id", travail.getId());
-            jsonTravail.addProperty("demande", travail.getDateCreation().toString());
+            
+            // Formatting the date for display on frontend
+            String pattern = "dd/MM/yyyy";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String dateDemande = simpleDateFormat.format(travail.getDateCreation());
+            
+            // The time also formatted
+            pattern = "HH:mm";
+            simpleDateFormat = new SimpleDateFormat(pattern);
+            String heureDemande = simpleDateFormat.format(travail.getDateCreation());
+            
+            // Making a new object to store both date and time
+            JsonObject jsonDemande = new JsonObject();
+            jsonDemande.addProperty("date", dateDemande);
+            jsonDemande.addProperty("heure", heureDemande);
+            jsonTravail.add("demande", jsonDemande);
+            
             jsonTravail.addProperty("medium", travail.getMedium().getDenomination());
             
             JsonObject jsonClient = new JsonObject();
