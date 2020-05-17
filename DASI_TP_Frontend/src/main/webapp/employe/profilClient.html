@@ -19,9 +19,9 @@ and open the template in the editor.
             <a href='index.html'><img src='../resources/img/blue_logo.png' alt='small_logo' class='navLogo'/></a>
             <a class='mediumText blue bold navItem'>Employé</a>
         </nav>
-        <div class='content'>
+        <div class='content purple'>
             <div class='profilContainer lightBlueBack'>
-                <div class='profilHeader bigText'><a href='travail.html' class='backLink'><i class="fas fa-angle-left purple"></i></a><span id='nomClient'>Alice PASCAL</span><div></div></div>
+                <div class='profilHeader bigText'><a href='travail.html' class='backLink'><i class="fas fa-angle-left purple"></i></a><span id='nomClient'></span><div></div></div>
                 <div class='cardContainer'>
                     <div class='card'>
                         <div class='cardTitle mediumText'>Profil Zodiaque</div>
@@ -51,23 +51,18 @@ and open the template in the editor.
                             Historique des consultation
                         </div>
                         <hr class='purple cardDivider'/>
-                        <div class='historyContainer'>
-                            <div class='historyEntry' onclick='toggleHistoryExpand()'>
-                                <div class='historyTitle'>
-                                    <span id='historyData'>03/12/1998</span>
-                                    <span id='historyMedium'>Mr. Médium</span>
-                                    <div class='dropdownBtn'>
-                                        <i class="fas fa-angle-down purple" id='historyEntry1Btn'></i>
-                                    </div>
-                                </div>
-                                <span id='historyEntry1'></span>
-                            </div>
+                        <div class='historyContainer' id='historyContainer'>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <script>
+            
+            $(document).ready( function () {
+                getConsultationData();
+            });
             
             let consultationHtml = "<hr class='purple cardDivider'/> <div class='cardData'> Durée : <span id='consultationDuration'></span> </div> <div class='subcard'> <div class='subcardTitle'>Prédiction Automatique</div> <hr class='purple cardDivider'/> <div class='cardData predictionInputContainer'> <input type='text' class='predictionInput' id='amour' placeholder='Amour'> <input type='text' class='predictionInput' id='sante' placeholder='Santé'> <input type='text' class='predictionInput' id='travail' placeholder='Travail'> <button class='fullBtnPurple fullBlueHover calculateBtn'>Calculer <i class='fas fa-arrow-down'></i></button> </div> <textarea class='cardTextarea' readonly></textarea> </div> <div class='subcard'> <div class='subcardTitle'>Commentaires</div> <hr class='purple cardDivider'/> <textarea class='cardTextarea commentArea'></textarea> </div>";
             
@@ -76,9 +71,9 @@ and open the template in the editor.
                 $('#consultationCardTitle').html("Consultation comme *nom-médium*");
             }
             
-            function toggleHistoryExpand() {
-                let elem = $('#historyEntry1');
-                let elemBtn = $('#historyEntry1Btn');
+            function toggleHistoryExpand(id) {
+                let elem = $('#historyEntry'+id);
+                let elemBtn = $('#historyEntryBtn'+id);
                 
                 if(elem.attr('expanded') === 'true') {
                     elem.html("");
@@ -86,11 +81,64 @@ and open the template in the editor.
                     elemBtn.removeClass('fa-angle-up');
                     elemBtn.addClass('fa-angle-down');
                 } else {
-                    elem.append("<hr class='purple cardDivider'/><div>A great consultation indeed !</div>");
+                    let comment = historiqueCommentsMap.get(id);
+                    
+                    elem.append("<hr class='purple cardDivider'/><div>" + (comment === null ? "Aucun commantaire" : comment) + "</div>");
                     elem.attr('expanded', 'true');
                     elemBtn.removeClass('fa-angle-down');
                     elemBtn.addClass('fa-angle-up');
                 }
+            }
+            
+            function getConsultationData() {
+                $.ajax({
+                        url: '../ActionServlet',
+                        method: 'GET',
+                        data: {
+                            todo: 'getDonneesConsultation'
+                        },
+                        dataType: 'json'
+                    })
+                    .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
+                        console.log(response);
+                        if(response && response.connexion && response.client 
+                                && response.historique && response.profilAstral) {
+                            let client = response.client;
+                            let historiqueArray = response.historique;
+                            let profilAstral = response.profilAstral;
+                            
+                            displayConsultationData(client, historiqueArray, profilAstral);
+                        } else {
+                            
+                        }
+                    })
+                    .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
+                        console.log('Error',error); // LOG dans Console Javascript
+                        alert("Erreur lors de l'appel AJAX");
+                    })
+                    .always( function () { // Fonction toujours appelée
+                        
+                });
+            }
+            
+            // This map will associate each historiqueEntry with its comment,
+            // using it's index in the historique array in response as key.
+            let historiqueCommentsMap = new Map();
+            
+            function displayConsultationData(client, historiqueArray, profilAstral) {
+                $('#nomClient').html(client.prenom + " " + client.nom);
+                
+                $('#signeZodiaque').html(profilAstral.signeZodiaque);
+                $('#signeChinois').html(profilAstral.signeChinois);
+                $('#couleur').html(profilAstral.couleur);
+                $('#animalTotem').html(profilAstral.animalTotem);
+                
+                let historiqueContainerElem = $('#historyContainer');
+                historiqueArray.forEach((entry, index) => {
+                    let entryHtml = "<div class='historyEntry' onclick='toggleHistoryExpand(" + index + ")'><div class='historyTitle'><span>" + "03/12/1998" + "</span><span> " + entry.medium + "</span><div class='dropdownBtn'><i class='fas fa-angle-down purple' id='historyEntryBtn" + index + "'></i></div></div><span id='historyEntry" + index + "'></span></div>";
+                    historiqueCommentsMap.set(index, entry.commentaire);
+                    historiqueContainerElem.append(entryHtml);
+                });
             }
             
         </script>

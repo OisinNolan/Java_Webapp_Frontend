@@ -23,11 +23,9 @@ public class GetDonneesConsultationAction extends Action {
     @Override
     public void executer(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Long idEmploye = (Long) session.getAttribute("idEmploye");
+        Employe employe = (Employe) session.getAttribute("employe");
         
         Service service = new Service();
-        
-        Employe employe = service.rechercherEmployeParId(idEmploye);
         Consultation travailEnCours = service.getConsultationEnCours(employe);
         
         Client client = travailEnCours.getClient();
