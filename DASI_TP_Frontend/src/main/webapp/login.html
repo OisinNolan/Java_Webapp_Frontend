@@ -29,6 +29,7 @@
                     <input type="password" id="mdpInput" class='inputField' placeholder="Mot de passe"/>
                 </div>
                 <div id="errorTextContainer" class="errorTextContainer"></div>
+                <div id="loadingContainer" class="errorTextContainer"></div>
                 <div class='formBtnContainer'>
                     <button id="connexionBtn" class='fullBtnPurple'>Connexion</button>
                     <a href="index.html"><button class='bareBtnPurple'>Annuler</button></a>
@@ -82,7 +83,7 @@
             }
             
             function hideLoading() {
-                $('#errorTextContainer').html("");
+                $('#loadingContainer').html("");
             }
         </script>
     </body>

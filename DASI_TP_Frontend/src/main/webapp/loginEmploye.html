@@ -33,6 +33,7 @@ and open the template in the editor.
                     <input type="password" id="mdpInput" class='inputField' placeholder="Mot de passe"/>
                 </div>
                 <div id="errorTextContainer" class="errorTextContainer"></div>
+                <div id="loadingContainer" class="errorTextContainer"></div>
                 <div class='formBtnContainer'>
                     <button id="connexionBtn" class='fullBtnPurple fullBlueHover'>Connexion</button>
                     <a href="index.html"><button class='bareBtnPurple bareBlueHover'>Annuler</button></a>
@@ -43,6 +44,8 @@ and open the template in the editor.
             $(document).ready( function () {
                 $('#connexionBtn').on( 'click', function () { // Fonction appelée lors du clic sur le bouton
 
+                    showLoading();
+                    
                     console.log("clic sur le bouton de connexion"); // LOG dans Console Javascript
 
                     // Récupération de la valeur des champs du formulaire
@@ -74,10 +77,18 @@ and open the template in the editor.
                         alert("Erreur lors de l'appel AJAX");
                     })
                     .always( function () { // Fonction toujours appelée
-                        
+                        hideLoading();
                     });
                 });
             });
+            
+            function showLoading() {
+                $('#errorTextContainer').html("<div class=\"lds-ellipsis\"><div></div><div></div><div></div><div></div></div>");
+            }
+            
+            function hideLoading() {
+                $('#loadingContainer').html("");
+            }
         </script>
     </body>
 </html>
