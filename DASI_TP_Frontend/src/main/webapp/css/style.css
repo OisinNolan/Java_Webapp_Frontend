@@ -115,7 +115,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px;
 }
 
 .bigLogo {
@@ -291,6 +290,47 @@ body {
     padding: 10px;
 }
 
+.seeMediumsText{
+    width: 100%;
+    text-align:center;
+    text-decoration: underline;
+}
+
+.seeMediumsText:hover {
+    cursor: pointer;
+}
+
+.slideshowContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.previewMediumsContainer {
+    width: 200px;
+    height: 130px;
+}
+
+.mediumPreview {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.mediumPic {
+    width: 100px;
+}
+
+.mediumInfo {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#slideshow > div { 
+    position: absolute;
+    
+}
 
 /* Snackbar styles -- snackbar code from w3schools
 /* The snackbar - position it at the bottom and in the middle of the screen */

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Statistiques</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/statistiques.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    </head>
+    <body>
+        <nav class='navbar'>
+            <a href='../index.html'><img src='../resources/img/blue_logo.png' alt='small_logo' class='navLogo'/></a>
+            <a class='mediumText blue bold navItem'>Employé</a>
+            <a href='travail.html' class='mediumText blue navItem'>Travail</a>
+            <a href='' class='mediumText blue navItem'>Statistiques</a>
+        </nav>
+        <div class='content purple'>
+            <div class='titleContainer hugeText'>Statistiques Predict'IF</div>
+            <canvas id="myChart"></canvas>
+        </div>
+        <script>
+            $(document).ready( function () {
+                getStats();
+                
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'line',
+
+                    // The data for our dataset
+                    data: {
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                        datasets: [{
+                            label: 'My First dataset',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: [0, 10, 5, 2, 20, 30, 45]
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {}
+                });
+            });
+            
+            function getStats() {
+                $.ajax({
+                        url: '../ActionServlet',
+                        method: 'GET',
+                        data: {
+                            todo: 'getStatistiques'
+                        },
+                        dataType: 'json'
+                    })
+                    .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
+                        console.log(response);
+                    })
+                    .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
+                        console.log('Error',error); // LOG dans Console Javascript
+                        alert("Erreur lors de l'appel AJAX");
+                    })
+                    .always( function () { // Fonction toujours appelée   
+                });
+            }
+        </script>
+    </body>
+</html>

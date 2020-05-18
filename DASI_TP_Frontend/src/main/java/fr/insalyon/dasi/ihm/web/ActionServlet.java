@@ -125,7 +125,7 @@ public class ActionServlet extends HttpServlet {
                     action = new ValiderConsultationAction();
                     serialisation = new GeneralSerialisation();
                     break;
-                case "GetStatistiques":
+                case "getStatistiques":
                     action = new GetStatistiquesAction();
                     serialisation = new StatistiquesSerialisation();
                     break;

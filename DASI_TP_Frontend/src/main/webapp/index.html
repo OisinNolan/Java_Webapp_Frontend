@@ -4,6 +4,8 @@
         <title>Predict'IF Accueil</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://kit.fontawesome.com/cf7a3548ef.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <nav class='navbar'>
@@ -33,6 +35,38 @@
                 prédictions personnalisées pour chaque client répondent à toutes les questions d’ordre sentimental,
                 professionnel ou psychologique dans le plus strict respect de la déontologie.
             </div>
+            <div class='slideshowContainer'>
+                <div id="slideshow" class='previewMediumsContainer'>
+                    <div class='mediumPreview'>
+                        <img src='resources/img/medium/Endora.png' class='mediumPic'/>
+                        <div class='mediumInfo'>
+                            <div class='mediumName mediumText bold purple'>Endora</div>
+                            <div class='mediumType mediumText purple'>Cartomancien</div> 
+                        </div>
+                    </div>
+                    <div class='mediumPreview'>
+                        <img src='resources/img/medium/Gwenaëlle.png' class='mediumPic'/>
+                        <div class='mediumInfo'>
+                            <div class='mediumName mediumText bold purple'>Gwenaëlle</div>
+                            <div class='mediumType mediumText purple'>Spirite</div> 
+                        </div>
+                    </div>
+                    <div class='mediumPreview'>
+                        <img src='resources/img/medium/Serena.png' class='mediumPic'/>
+                        <div class='mediumInfo'>
+                            <div class='mediumName mediumText bold purple'>Serena</div>
+                            <div class='mediumType mediumText purple'>Astrologue</div> 
+                        </div>
+                    </div>
+                    <div class='mediumPreview'>
+                        <img src='resources/img/medium/Professeur_Tran.png' class='mediumPic'/>
+                        <div class='mediumInfo'>
+                            <div class='mediumName mediumText bold purple'>Professeur Tran</div>
+                            <div class='mediumType mediumText purple'>Spirite</div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class='landingBtnContainer'>
                <a href="inscription.html" class='fullBtnPurple'>S'Inscrire</a>
                <a href="login.html" class='bareBtnPurple'>Se connecter</a>
@@ -41,5 +75,18 @@
                 <a href="loginEmploye.html" class='link purple'>Vous êtes un employé ? Connectez-vous ici.</a>
             </div>
         </div>
+        
+        <script>
+            $("#slideshow > div:gt(0)").hide();
+
+            setInterval(function() { 
+              $('#slideshow > div:first')
+                .fadeOut(1000)
+                .next()
+                .fadeIn(1000)
+                .end()
+                .appendTo('#slideshow');
+            },  3000);
+        </script>
     </body>
 </html>
