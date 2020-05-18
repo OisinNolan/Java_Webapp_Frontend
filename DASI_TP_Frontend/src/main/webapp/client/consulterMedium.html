@@ -103,6 +103,15 @@ and open the template in the editor.
                                     display(medium, false);
                                 });
                             }
+                            
+                            for(let mediumType in mediumInSectionCount) {
+                                console.log(mediumType, mediumInSectionCount[mediumType]);
+                                if(mediumInSectionCount[mediumType] <= 0) {
+                                   let section = "#" + mediumType + "Section";
+                                   let messageHtml = "<div class='noMediumMessage'>Aucun médium de type " + mediumType + " n'est disponible en ce moment.</div>";
+                                   $(section).append(messageHtml);
+                                }
+                            }
                         }
                     })
                     .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
@@ -113,6 +122,13 @@ and open the template in the editor.
                         
                 });
             }
+            
+            // This map keeps track of how many mediums are displayed in each section.
+            let mediumInSectionCount = {
+                Spirite : 0,
+                Cartomancien : 0,
+                Astrologue : 0,
+            };
             
             function display(m, selected) {
 
@@ -130,6 +146,7 @@ and open the template in the editor.
                     $('#selectedMediumSection').append(cardHtml);
                 } else {
                     let section = "#" + m.class + "Section";
+                    ++mediumInSectionCount[m.class];
                     $(section).append(cardHtml);
                 }            
             }
@@ -164,11 +181,20 @@ and open the template in the editor.
                 });
             }
             
+            // A text-for-display version of the mediums attributes
+            let mediumAttributes = {
+                presentation: "Présentation",
+                support: "Support",
+                formation: "Formation"
+            };
+            
             function generateCardHtml(medium, selected) {
-                let htmlString = "<div class='mediumCard " + (selected ? "selectedCard" : "" ) + "'> <div class='cardBody'> <div class='cardLeftPanel'> <img src='../resources/img/medium/" + medium.id + ".png' class='mediumPic'/> </div> <div class='cardRightPanel'> <div class='mediumName mediumText'>" + medium.denomination + "</div>";
+                let profilePicFilename = medium.denomination.replace(" ", "_");
+                let htmlString = "<div class='mediumCard " + (selected ? "selectedCard" : "" ) + "'> <div class='cardBody'> <div class='cardLeftPanel'> <img src='../resources/img/medium/" + profilePicFilename + ".png' class='mediumPic'/> </div> <div class='cardRightPanel'> <div class='mediumName mediumText'>" + medium.denomination + "</div>";
                 for(let attr in medium) {
                     if (attr === "id" || attr === "denomination" || attr === "genre" || attr === "class") continue;
-                    htmlString += "<div class='mediumInfo'><span class='mediumInfoType'>" + attr + ":</span>" + medium[attr] + "</div>";
+                    
+                    htmlString += "<div class='mediumInfo'><span class='mediumInfoType'><b>" + mediumAttributes[attr] + " : </b></span>" + medium[attr] + "</div>";
                 }
                 htmlString += "</div></div>";
                 if(!selected) {
