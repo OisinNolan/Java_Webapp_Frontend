@@ -69,3 +69,7 @@ and open the template in the editor.
 .selectedCard {
     border: 3px solid #f76583;
 }
+
+.noMediumMessage {
+    padding: 10px;
+}
