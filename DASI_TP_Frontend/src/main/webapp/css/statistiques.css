@@ -18,3 +18,30 @@ and open the template in the editor.
     text-align: center;
     margin-top: 50px;
 }
+
+.chartContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+    width: 80%;
+}
+
+.chartTitle {
+    margin-bottom: 30px;
+    margin-left: 20px;
+}
+
+.chart {
+    margin-bottom: 50px;
+}
+
+.topFiveMediumsContainer {
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    padding-top: 10px;
+}
+
+.topFiveTitle {
+    margin-left: 20px;
+}

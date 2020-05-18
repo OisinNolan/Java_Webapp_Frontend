@@ -23,32 +23,17 @@ and open the template in the editor.
         </nav>
         <div class='content purple'>
             <div class='titleContainer hugeText'>Statistiques Predict'IF</div>
-            <canvas id="myChart"></canvas>
+            <div id='errorMessage' class='errorText'></div>
+            <div id='chartContainer' class='chartContainer'></div>
         </div>
         <script>
             $(document).ready( function () {
                 getStats();
                 
-                var ctx = document.getElementById('myChart').getContext('2d');
-                var chart = new Chart(ctx, {
-                    // The type of chart we want to create
-                    type: 'line',
-
-                    // The data for our dataset
-                    data: {
-                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                        datasets: [{
-                            label: 'My First dataset',
-                            backgroundColor: 'rgb(255, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            data: [0, 10, 5, 2, 20, 30, 45]
-                        }]
-                    },
-
-                    // Configuration options go here
-                    options: {}
-                });
+                
             });
+            
+            let numCharts = 0;
             
             function getStats() {
                 $.ajax({
@@ -61,6 +46,47 @@ and open the template in the editor.
                     })
                     .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
                         console.log(response);
+                        if(response.connexion && response.mediumMap 
+                                && response.repartition && response.topCinque) {
+                            
+                            // Barchart for No. Consultations
+                            let labels = [];
+                            let data = [];
+                            let title = "Nombre de consultations par Médium";
+                            
+                            response.mediumMap.forEach(obj => {
+                               labels.push(obj.denomination);
+                               data.push(obj.nbConsultations);
+                            });
+                            
+                            makeBarchart(labels, data, title);
+                            
+                            // Piechart for répartition
+                            labels = [];
+                            data = [];
+                            title = "Répartition du travail";
+                            
+                            response.repartition.forEach(obj => {
+                                labels.push(obj.prenom + " " + obj.nom);
+                                data.push(obj.clients.length);
+                            });
+                            
+                            makePiechart(labels, data, title);
+                            
+                            // Display top 5 mediums
+                            let titleHtml = "<div class='topFiveTitle bigText purple'>Top 5 Médiums</div>";
+                            $('#chartContainer').append(titleHtml); 
+                            
+                            let topFiveHtml = "<div class='topFiveMediumsContainer'>";
+                            response.topCinque.forEach((obj, index) => {
+                                topFiveHtml += "<div class='mediumEntry mediumText'>" + (index+1) +  " - " + obj.denomination + "</div>"
+                            });
+                            topFiveHtml += "</div>"
+                            $('#chartContainer').append(topFiveHtml);
+                            
+                        } else {
+                            $('#errorMessage').html("Une erreur de serveur s'est produite lors du calcul des statistiques.");
+                        }
                     })
                     .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
                         console.log('Error',error); // LOG dans Console Javascript
@@ -69,6 +95,84 @@ and open the template in the editor.
                     .always( function () { // Fonction toujours appelée   
                 });
             }
+            
+            function makeBarchart(labelsParam, dataParam, title){
+                let titleHtml = "<div class='chartTitle bigText purple'>" + title + "</div>";
+                $('#chartContainer').append(titleHtml);
+        
+                let chartCanvasHtml = "<canvas id='myChart" + numCharts + "' class='chart'></canvas>";
+                $('#chartContainer').append(chartCanvasHtml);
+                
+                let ctx = document.getElementById('myChart' + numCharts).getContext('2d');
+                var chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'bar',
+
+                    // The data for our dataset
+                    data: {
+                        labels: labelsParam,
+                        datasets: [{
+                            label: 'No. Consultations',
+                            backgroundColor: '#c04849',
+                            borderColor: '#c04849',
+                            data: dataParam
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {
+                        title: {
+                            display: true,
+                            text: title,
+                            position: 'left'
+                        }
+                    }
+                });
+                
+                ++numCharts;
+            }
+            
+            let pieColours = [
+                '#310030',
+                '#470049',
+                '#5f1848',
+                '#c04849',
+                '#f07140'
+            ];
+            
+            function makePiechart(labelsParam, dataParam, title) {
+                let titleHtml = "<div class='chartTitle bigText purple'>" + title + "</div>";
+                $('#chartContainer').append(titleHtml);
+        
+                let chartCanvasHtml = "<canvas id='myChart" + numCharts + "' class='chart'></canvas>";
+                $('#chartContainer').append(chartCanvasHtml);
+                
+                let colours = [];
+                dataParam.forEach((data, i) => {
+                    colours.push(pieColours[i%pieColours.length]);
+                });
+                
+                let ctx = document.getElementById('myChart' + numCharts).getContext('2d');
+                var chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'doughnut',
+
+                    // The data for our dataset
+                    data: {
+                        datasets: [{
+                            data : dataParam,
+                            backgroundColor: colours
+                        }],
+                        labels: labelsParam
+                    },
+                    
+                    // Configuration options go here
+                    options: {}
+                });
+                
+                ++numCharts;
+            }
+            
         </script>
     </body>
 </html>
