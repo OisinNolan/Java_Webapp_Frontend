@@ -6,7 +6,9 @@
 package fr.insalyon.dasi.ihm.web.action;
 
 import fr.insalyon.dasi.metier.modele.Client;
+import fr.insalyon.dasi.metier.modele.Consultation;
 import fr.insalyon.dasi.metier.service.Service;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,8 +24,11 @@ public class GetProfilAstralAction extends Action  {
         Long idClient = (Long) session.getAttribute("idClient");
         
         Service service = new Service();
-        Client client = service.rechercherClientParId(idClient);
-        request.setAttribute("profilAstral", client.getProfilAstral());
         
+        Client client = service.rechercherClientParId(idClient);
+        List<Consultation> historique = service.listerHistoriqueConsultations(client);
+        
+        request.setAttribute("profilAstral", client.getProfilAstral());
+        request.setAttribute("historique", historique);
     }
 }

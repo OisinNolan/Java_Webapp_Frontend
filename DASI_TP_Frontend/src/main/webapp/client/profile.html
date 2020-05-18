@@ -12,6 +12,7 @@ and open the template in the editor.
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="stylesheet" type="text/css" href="../css/profilAstral.css">
+        <link rel="stylesheet" type="text/css" href="../css/profilClient.css">
     </head>
     <body>
         <nav class='navbar'>
@@ -37,6 +38,17 @@ and open the template in the editor.
                     Animal-totem : <span id='animalTotem' class='pink'></span>
                 </div>
                 
+            </div>
+            <div class='profilAstralContainer lightPinkBack purple'>
+                <div class='card'>
+                    <div class='cardTitle mediumText'>
+                        Historique de vos consultations
+                    </div>
+                    <hr class='purple cardDivider'/>
+                    <div class='historyContainer' id='historyContainer'>
+                        <!-- The history entries are added here dynamically -->
+                    </div>
+                </div>
             </div>
         </div>
         <script>
@@ -88,6 +100,13 @@ and open the template in the editor.
                             $('#signeChinois').html(profil.signeChinois);
                             $('#couleur').html(profil.couleur);
                             $('#animalTotem').html(profil.animalTotem);
+                        
+                            let historiqueArray = response.historique;
+                            let historiqueContainerElem = $('#historyContainer');
+                            historiqueArray.forEach((entry, index) => {
+                                let entryHtml = "<div class='historyEntry'><div class='historyTitle'><span>" + entry.fin + "</span> <span> " + entry.medium + "</span><div class='dropdownBtn'><i class='fas fa-angle-down purple' id='historyEntryBtn" + index + "'></i></div></div><span id='historyEntry" + index + "'></span></div>";
+                                historiqueContainerElem.append(entryHtml);
+                            });
                         }
                     })
                     .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX

@@ -48,7 +48,7 @@ and open the template in the editor.
                     </div>
                     <div class='card'>
                         <div class='cardTitle mediumText'>
-                            Historique des consultation
+                            Historique des consultations
                         </div>
                         <hr class='purple cardDivider'/>
                         <div class='historyContainer' id='historyContainer'>
@@ -264,7 +264,7 @@ and open the template in the editor.
                 
                 let historiqueContainerElem = $('#historyContainer');
                 historiqueArray.forEach((entry, index) => {
-                    let entryHtml = "<div class='historyEntry' onclick='toggleHistoryExpand(" + index + ")'><div class='historyTitle'><span>" + "03/12/1998" + "</span><span> " + entry.medium + "</span><div class='dropdownBtn'><i class='fas fa-angle-down purple' id='historyEntryBtn" + index + "'></i></div></div><span id='historyEntry" + index + "'></span></div>";
+                    let entryHtml = "<div class='historyEntry' onclick='toggleHistoryExpand(" + index + ")'><div class='historyTitle'><span>" + entry.fin + "</span> <span> " + entry.medium + "</span><div class='dropdownBtn'><i class='fas fa-angle-down purple' id='historyEntryBtn" + index + "'></i></div></div><span id='historyEntry" + index + "'></span></div>";
                     historiqueCommentsMap.set(index, entry.commentaire);
                     historiqueContainerElem.append(entryHtml);
                 });

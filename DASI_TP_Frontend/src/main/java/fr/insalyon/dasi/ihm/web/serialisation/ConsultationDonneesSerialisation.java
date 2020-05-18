@@ -67,12 +67,8 @@ public class ConsultationDonneesSerialisation extends Serialisation{
                 JsonObject jsonConsultation = new JsonObject();
                 
                 jsonConsultation.addProperty("id", c.getId());
-                //
-                // Commented to prevent nullpointer due to current consultation
-                // (which hasn't yet started or ended) being included in historique
-                //
-                //jsonConsultation.addProperty("debut", c.getDebut().toString());
-                //jsonConsultation.addProperty("fin", c.getFin().toString());
+                jsonConsultation.addProperty("debut", c.getDebut().toString());
+                jsonConsultation.addProperty("fin", c.getFin().toString());
                 jsonConsultation.addProperty("employe", c.getEmploye().getPrenom() + " " + c.getEmploye().getNom());
                 jsonConsultation.addProperty("medium", c.getMedium().getDenomination());
                 jsonConsultation.addProperty("commentaire", c.getCommentaire());
