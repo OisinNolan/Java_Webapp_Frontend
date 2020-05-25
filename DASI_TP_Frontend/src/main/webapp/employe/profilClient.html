@@ -264,7 +264,7 @@ and open the template in the editor.
                 
                 let historiqueContainerElem = $('#historyContainer');
                 historiqueArray.forEach((entry, index) => {
-                    let entryHtml = "<div class='historyEntry' onclick='toggleHistoryExpand(" + index + ")'><div class='historyTitle'><span>" + entry.fin + "</span> <span> " + entry.medium + "</span><div class='dropdownBtn'><i class='fas fa-angle-down purple' id='historyEntryBtn" + index + "'></i></div></div><span id='historyEntry" + index + "'></span></div>";
+                    let entryHtml = "<div class='historyEntry' onclick='toggleHistoryExpand(" + index + ")'><div class='historyTitle'><span>" + entry.demande.date + "</span> <span style='margin-left: 5px'> " + entry.medium + "</span><div class='dropdownBtn'><i class='fas fa-angle-down purple' id='historyEntryBtn" + index + "'></i></div></div><span id='historyEntry" + index + "'></span></div>";
                     historiqueCommentsMap.set(index, entry.commentaire);
                     historiqueContainerElem.append(entryHtml);
                 });

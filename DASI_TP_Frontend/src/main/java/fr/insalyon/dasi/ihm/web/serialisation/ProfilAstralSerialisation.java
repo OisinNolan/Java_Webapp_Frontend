@@ -13,6 +13,7 @@ import fr.insalyon.dasi.metier.modele.Consultation;
 import fr.insalyon.dasi.metier.modele.ProfilAstral;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,8 +56,23 @@ public class ProfilAstralSerialisation extends Serialisation {
                 JsonObject jsonConsultation = new JsonObject();
                 
                 jsonConsultation.addProperty("id", c.getId());
-                jsonConsultation.addProperty("debut", c.getDebut().toString());
-                jsonConsultation.addProperty("fin", c.getFin().toString());
+                
+                // Formatting the date for display on frontend
+                String pattern = "dd/MM/yyyy";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                String dateDemande = simpleDateFormat.format(c.getDateCreation());
+
+                // The time also formatted
+                pattern = "HH:mm";
+                simpleDateFormat = new SimpleDateFormat(pattern);
+                String heureDemande = simpleDateFormat.format(c.getDateCreation());
+            
+                // Making a new object to store both date and time
+                JsonObject jsonDemande = new JsonObject();
+                jsonDemande.addProperty("date", dateDemande);
+                jsonDemande.addProperty("heure", heureDemande);
+                jsonConsultation.add("demande", jsonDemande);
+                
                 jsonConsultation.addProperty("medium", c.getMedium().getDenomination());
                 
                 jsonHistorique.add(jsonConsultation);

@@ -38,6 +38,7 @@ public class GetDonneesConsultationAction extends Action {
         request.setAttribute("profilAstral", profilAstral);
         request.setAttribute("historique", historique);
         request.setAttribute("nomMedium", nomMedium);
+        
     }
     
 }
